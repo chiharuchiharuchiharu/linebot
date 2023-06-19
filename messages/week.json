@@ -1,0 +1,137 @@
+{
+    "type": "carousel",
+    "contents": [
+      {
+        "type": "bubble",
+        "size": "micro",
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "text",
+              "text": "7/24(月)",
+              "size": "xl"
+            },
+            {
+              "type": "text",
+              "text": "〜7/30(日)",
+              "size": "xl"
+            }
+          ],
+          "height": "150px",
+          "justifyContent": "center",
+          "alignItems": "center",
+          "action": {
+            "type": "message",
+            "label": "week",
+            "text": "7/24-7/30"
+          }
+        },
+        "styles": {
+          "footer": {
+            "separator": false
+          }
+        }
+      },
+      {
+        "type": "bubble",
+        "size": "micro",
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "text",
+              "text": "7/31(月)",
+              "size": "xl"
+            },
+            {
+              "type": "text",
+              "text": "〜8/6(日)",
+              "size": "xl"
+            }
+          ],
+          "height": "150px",
+          "justifyContent": "center",
+          "alignItems": "center",
+          "action": {
+            "type": "message",
+            "label": "week",
+            "text": "7/31-8/6"
+          }
+        },
+        "styles": {
+          "footer": {
+            "separator": false
+          }
+        }
+      },
+      {
+        "type": "bubble",
+        "size": "micro",
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "text",
+              "text": "8/7(月)",
+              "size": "xl"
+            },
+            {
+              "type": "text",
+              "text": "〜8/13(日)",
+              "size": "xl"
+            }
+          ],
+          "height": "150px",
+          "justifyContent": "center",
+          "alignItems": "center",
+          "action": {
+            "type": "message",
+            "label": "week",
+            "text": "8/7-8/13"
+          }
+        },
+        "styles": {
+          "footer": {
+            "separator": false
+          }
+        }
+      },
+      {
+        "type": "bubble",
+        "size": "micro",
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "text",
+              "text": "8/14(月)",
+              "size": "xl"
+            },
+            {
+              "type": "text",
+              "text": "〜8/20(日)",
+              "size": "xl"
+            }
+          ],
+          "height": "150px",
+          "justifyContent": "center",
+          "alignItems": "center",
+          "action": {
+            "type": "message",
+            "label": "week",
+            "text": "8/14-8/20"
+          }
+        },
+        "styles": {
+          "footer": {
+            "separator": false
+          }
+        }
+      }
+    ]
+  }

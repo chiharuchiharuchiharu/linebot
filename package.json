@@ -1,0 +1,10 @@
+{
+  "name": "linebot-test",
+  "version": "0.0.1",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.2.0",
+    "@line/bot-sdk": "^7.5.2",
+    "dotenv": "^16.0.3",
+    "firebase-functions": "^4.3.1"
+  }
+}
