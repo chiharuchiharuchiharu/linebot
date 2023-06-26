@@ -55,14 +55,14 @@ function handleMassageEvent(event) {
     db.run(`insert or ignore into users values("${userId}", "")`);
 
     if (text.match(/登録/)) {
-      return getWeekBubbleMassage(event);
+      return getWeekBubbleMessage(event);
     } else {
       return getReplayTextMessage(event, `${text} とは？`);
     }
   });
 }
 
-function getWeekBubbleMassage(event) {
+function handlePostbackEvent(event) {
   const userId = event.source.userId;
   const data = event.postback.data;
 
