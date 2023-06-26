@@ -81,6 +81,7 @@ function handlePostbackEvent(event) {
         case "3":
           return getTimeBubbleMessage(event, parseInt(state));
         case "4":
+          return getRegisterBubbleMessage(event);
         case "5":
       }
     } else {
@@ -283,7 +284,7 @@ function getDayBubbleMessage(event) {
 function getTimeBubbleMessage(event, state) {
   let data = {};
 
-  const times = {};
+  const times = [];
   let startTime = 8;
   let endTime = 21;
 
@@ -341,6 +342,96 @@ function getTimeBubbleMessage(event, state) {
               layout: "vertical",
               contents: content,
               spacing: "md",
+            },
+            styles: {
+              footer: {
+                separator: false,
+              },
+            },
+          },
+        ],
+      },
+    },
+  ]);
+}
+
+function getRegisterBubbleMessage(event) {
+  const data = JSON.parse(event.postback.data.split(" ")[2]);
+  data.end = parseInt(event.postback.data.split(" ")[1]);
+
+  return client.replyMessage(event.replyToken, [
+    {
+      type: "text",
+      text: `以下の内容で登録しますか?\n> ${data.date} ${data.start}時 - ${data.end}時`,
+    },
+    {
+      type: "flex",
+      altText: "以上の内容で登録しますか?",
+      contents: {
+        type: "carousel",
+        contents: [
+          {
+            type: "bubble",
+            size: "giga",
+            body: {
+              type: "box",
+              layout: "vertical",
+              contents: [
+                {
+                  type: "box",
+                  layout: "horizontal",
+                  contents: [
+                    {
+                      type: "box",
+                      layout: "vertical",
+                      contents: [
+                        {
+                          type: "text",
+                          text: "はい",
+                          size: "lg",
+                        },
+                      ],
+                      backgroundColor: "#FFD876",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      cornerRadius: "lg",
+                      offsetEnd: "none",
+                      width: "165px",
+                      action: {
+                        type: "postback",
+                        label: "register",
+                        data: `#5 yse ${JSON.stringify(data)}`,
+                        displayText: "はい",
+                      },
+                    },
+                    {
+                      type: "box",
+                      layout: "vertical",
+                      contents: [
+                        {
+                          type: "text",
+                          text: "キャンセル",
+                          size: "lg",
+                        },
+                      ],
+                      backgroundColor: "#FFD876",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      cornerRadius: "lg",
+                      offsetStart: "none",
+                      width: "165px",
+                      action: {
+                        type: "postback",
+                        label: "register",
+                        data: "#5 cnacel",
+                        displayText: "キャンセル",
+                      },
+                    },
+                  ],
+                  height: "40px",
+                  justifyContent: "space-evenly",
+                },
+              ],
             },
             styles: {
               footer: {
