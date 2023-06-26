@@ -76,6 +76,7 @@ function handlePostbackEvent(event) {
         case "0":
           return getWeekBubbleMessage(event);
         case "1":
+          return getDayBubbleMessage(event);
         case "2":
         case "3":
         case "4":
@@ -161,11 +162,143 @@ function getWeekBubbleMessage(event) {
   ]);
 }
 
+function getDayBubbleMessage(event) {
+  const selectedFirstDate = event.postback.data.sprit(" ")[1];
+  const dates = getWeekdates(selectedFirstDate);
+
+  const days = ["月", "火", "水", "木","金","土","日",];
+  const content = dates.map((date, i) => {
+    return {
+      type: "box",
+      layout: "vertical",
+      contents: [
+        {
+          type: "text",
+          text: `${date}(${days[i]})`,
+          size: "lg",
+        },
+      ],
+      backgroundColor: "#FFD876",
+      justifyContent: "center",
+      alignItems: "center",
+      cornerRadius: "lg",
+      offsetEnd: "none",
+      width: "160px",
+      action: {
+        type: "postback",
+        label: "day",
+        data: `#2 ${date}`,
+        displayText: `${date}(${days[i]})`,
+      },
+    };
+  });
+
+  return client.replyMessage(event.replyToken, [
+    {
+      type: "text",
+      text: "どの日のシフトを登録しますか?",
+    },
+    {
+      type: "flex",
+      altText: "日を選択してください",
+      contents: {
+        type: "carousel",
+        contents: [
+          {
+            type: "bubble",
+            size: "giga",
+            body: {
+              type: "box",
+              layout: "vertical",
+              contents: [
+                {
+                  type: "box",
+                  layout: "horizontal",
+                  contents: [content[0], content[1]],
+                  height: "160px",
+                  justifyContent: "space-evenly",
+                },
+                {
+                  type: "box",
+                  layout: "horizontal",
+                  contents: [content[2], content[3]],
+                  height: "160px",
+                  justifyContent: "space-evenly",
+                },
+                {
+                  type: "box",
+                  layout: "horizontal",
+                  contents: [content[4], content[5]],
+                  height: "160px",
+                  justifyContent: "space-evenly",
+                },
+                {
+                  type: "box",
+                  layout: "horizontal",
+                  contents: [
+                    content[6],
+                    {
+                      type: "box",
+                      layout: "vertical",
+                      contents: [
+                        {
+                          type: "text",
+                          text: "キャンセル",
+                          size: "lg",
+                        },
+                      ],
+                      backgroundColor: "#FFD876",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      cornerRadius: "lg",
+                      offsetStart: "none",
+                      width: "160px",
+                      action: {
+                        type: "postback",
+                        label: "day",
+                        data: "#2 cancel",
+                        displayText: "キャンセル",
+                      },
+                    },
+                  ],
+                  height: "160px",
+                  justifyContent: "space-evenly",
+                },
+              ],
+              spacing: "md",
+            },
+            styles: {
+              footer: {
+                separator: false,
+              },
+            },
+          },
+        ],
+      },
+    },
+  ]);
+}
+
 function getWeekLastDate(date) {
   const first = new Date(date);
   const last = new Date(first.getTime() + 6 * 24 * 60 * 60 * 1000);
 
   return `${last.getMonth() + 1}/${last.getDate()}`;
+}
+
+// 一週間分の日付を取得
+function getWeekdates(firstDate) {
+  const specifiedDate = new Date(firstDate);
+
+  const dates = [];
+  for (let i = 0; i < 7; i++) {
+    const currentDate = new Date(
+      specifiedDate.getTime() + i * 24 * 60 * 60 * 1000
+    );
+    dates.push(`${currentDate.getMonth() + 1}/${currentDate.getDate()}`);
+  }
+
+  return dates;
 }
 
 app.listen(PORT);
