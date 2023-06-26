@@ -163,7 +163,7 @@ function getWeekBubbleMessage(event) {
 }
 
 function getDayBubbleMessage(event) {
-  const selectedFirstDate = event.postback.data.sprit(" ")[1];
+  const selectedFirstDate = event.postback.data.split(" ")[1];
   const dates = getWeekdates(selectedFirstDate);
 
   const days = ["月", "火", "水", "木","金","土","日",];
