@@ -48,7 +48,7 @@ async function handleEvent(event) {
 }
 
 function handleMassageEvent(event) {
-  const userId = event.sourse.userId;
+  const userId = event.source.userId;
   const text = event.message.text;
 
   db.serialize(() => {
@@ -63,7 +63,7 @@ function handleMassageEvent(event) {
 }
 
 function getWeekBubbleMassage(event) {
-  const userId = event.sourse.userId;
+  const userId = event.source.userId;
   const data = event.postback.data;
 
   db.serialize(() => {
