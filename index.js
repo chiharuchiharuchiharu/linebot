@@ -147,8 +147,8 @@ function getWeekBubbleMessage(event) {
           separator: false,
         },
       },
-    }
-  })
+    };
+  });
   return client.replyMessage(event.replyToken, [
     {
       type: "text",
@@ -169,7 +169,7 @@ function getDayBubbleMessage(event) {
   const selectedFirstDate = event.postback.data.split(" ")[1];
   const dates = getWeekdates(selectedFirstDate);
 
-  const days = ["月", "火", "水", "木","金","土","日",];
+  const days = ["月", "火", "水", "木", "金", "土", "日"];
   const content = dates.map((date, i) => {
     return {
       type: "box",
@@ -289,9 +289,9 @@ function getTimeBubbleMessage(event, state) {
   let startTime = 8;
   let endTime = 21;
 
-  if(state == 2){
+  if (state == 2) {
     data.date = event.postback.data.split(" ")[1];
-  }else{
+  } else {
     const start = parseInt(event.postback.data.split(" ")[1]);
     data = JSON.parse(event.postback.data.split(" ")[2]);
     data.start = start;
@@ -299,7 +299,7 @@ function getTimeBubbleMessage(event, state) {
     endTime = 22;
   }
 
-  for(let i = startTime; i <= endTime; i++) times.push(i);
+  for (let i = startTime; i <= endTime; i++) times.push(i);
 
   const content = times.map((time) => {
     return {
@@ -449,9 +449,10 @@ function getRegisterBubbleMessage(event) {
 function getConfirmMessage(event) {
   const operation = event.postback.data.split(" ")[1];
 
-  if(operation == "cancel") {
+  if (operation == "cancel") {
     return getReplayTextMessage(event, "キャンセルしました");
-  }else{
+  } else {
+    console.log({ event });
     const data = JSON.parse(event.postback.data.split(" ")[2]);
     return getReplayTextMessage(event, "登録しました");
   }
