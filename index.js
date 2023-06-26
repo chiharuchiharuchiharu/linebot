@@ -449,6 +449,8 @@ function getRegisterBubbleMessage(event) {
 function getConfirmMessage(event) {
   const operation = event.postback.data.split(" ")[1];
 
+  console.log(event, operation);
+
   if (operation == "cancel") {
     return getReplayTextMessage(event, "キャンセルしました");
   } else {
