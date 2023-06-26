@@ -161,5 +161,12 @@ function getWeekBubbleMessage(event) {
   ]);
 }
 
+function getWeekLastDate(date) {
+  const first = new Date(date);
+  const last = new Date(first.getTime() + 6 * 24 * 60 * 60 * 1000);
+
+  return `${last.getMonth() + 1}/${last.getDate()}`;
+}
+
 app.listen(PORT);
 console.log(`Server running at ${PORT}`);
