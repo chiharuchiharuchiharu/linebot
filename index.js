@@ -83,6 +83,7 @@ function handlePostbackEvent(event) {
         case "4":
           return getRegisterBubbleMessage(event);
         case "5":
+          return getConfirmMessage(event);
       }
     } else {
       return getReplayTextMessage(event, `${text} とは？`);
@@ -291,7 +292,7 @@ function getTimeBubbleMessage(event, state) {
   if(state == 2){
     data.date = event.postback.data.split(" ")[1];
   }else{
-    const start = parseInt(event.postback.data.split(" ")[2]);
+    const start = parseInt(event.postback.data.split(" ")[1]);
     data = JSON.parse(event.postback.data.split(" ")[2]);
     data.start = start;
     startTime = start + 1;
@@ -443,6 +444,17 @@ function getRegisterBubbleMessage(event) {
       },
     },
   ]);
+}
+
+function getConfirmMessage(event) {
+  const operation = event.postback.data.split(" ")[1];
+
+  if(operation == "cancel") {
+    return getReplayTextMessage(event, "キャンセルしました");
+  }else{
+    const data = JSON.parse(event.postback.data.split(" ")[2]);
+    return getReplayTextMessage(event, "登録しました");
+  }
 }
 
 function getWeekLastDate(date) {
