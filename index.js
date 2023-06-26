@@ -79,6 +79,7 @@ function handlePostbackEvent(event) {
           return getDayBubbleMessage(event);
         case "2":
         case "3":
+          return getTimeBubbleMessage(event, parseInt(state));
         case "4":
         case "5":
       }
@@ -265,6 +266,80 @@ function getDayBubbleMessage(event) {
                   justifyContent: "space-evenly",
                 },
               ],
+              spacing: "md",
+            },
+            styles: {
+              footer: {
+                separator: false,
+              },
+            },
+          },
+        ],
+      },
+    },
+  ]);
+}
+
+function getTimeBubbleMessage(event, state) {
+  let data = {};
+
+  const times = {};
+  let startTime = 8;
+  let endTime = 21;
+
+  if(state == 2){
+    data.date = event.postback.data.split(" ")[1];
+  }else{
+    const start = parseInt(event.postback.data.split(" ")[2]);
+    data = JSON.parse(event.postback.data.split(" ")[2]);
+    data.start = start;
+    startTime = start + 1;
+    endTime = 22;
+  }
+
+  for(let i = startTime; i <= endTime; i++) times.push(i);
+
+  const content = times.map((time) => {
+    return {
+      type: "box",
+      layout: "vertical",
+      contents: [
+        {
+          type: "text",
+          text: `${time}時`,
+        },
+      ],
+      backgroundColor: "#ffd876",
+      justifyContent: "center",
+      alignItems: "center",
+      cornerRadius: "xxl",
+      action: {
+        type: "postback",
+        label: "time",
+        data: `#${state + 1} ${time} ${JSON.stringify(data)}`,
+        displayText: `${time}時`,
+      },
+    };
+  });
+
+  return client.replyMessage(event.replyToken, [
+    {
+      type: "text",
+      text: `${state == 2 ? "開始" : "終了"}時間を選択してください`,
+    },
+    {
+      type: "flex",
+      altText: `${state == 2 ? "開始" : "終了"}時間を選択してください`,
+      contents: {
+        type: "carousel",
+        contents: [
+          {
+            type: "bubble",
+            size: "micro",
+            body: {
+              type: "box",
+              layout: "vertical",
+              contents: content,
               spacing: "md",
             },
             styles: {
