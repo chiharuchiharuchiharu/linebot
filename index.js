@@ -92,3 +92,6 @@ function getReplayTextMessage(event, text) {
     text: text,
   });
 }
+
+app.listen(PORT);
+console.log(`Server running at ${PORT}`);
