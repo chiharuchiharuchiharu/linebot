@@ -74,6 +74,7 @@ function getWeekBubbleMassage(event) {
 
       switch (state) {
         case "0":
+          return getWeekBubbleMessage(event);
         case "1":
         case "2":
         case "3":
@@ -91,6 +92,73 @@ function getReplayTextMessage(event, text) {
     type: "text",
     text: text,
   });
+}
+
+function getWeekBubbleMessage(event) {
+  const weeks = ["6/26", "7/3", "7/10"];
+  const weekBubbles = weeks.map((first) => {
+    const last = getWeekLastDate(first);
+
+    return {
+      type: "bubble",
+      size: "micro",
+      body: {
+        type: "box",
+        layout: "vertical",
+        contents: [
+          {
+            type: "text",
+            text: `${first}(月)`,
+            color: "#ffffff",
+            size: "xl",
+            align: "start",
+            gravity: "center",
+            wrap: true,
+            margin: "sm",
+          },
+          {
+            type: "text",
+            text: `~${last}(日)`,
+            color: "#ffffff",
+            size: "xl",
+            margin: "sm",
+          },
+        ],
+        action: {
+          type: "postback",
+          label: "action",
+          data: `#1 ${first} ${last}`,
+          displayText: `${first} - ${last}`,
+        },
+        spacing: "sm",
+        height: "150px",
+        alignItems: "center",
+        justifyContent: "center",
+      },
+      styles: {
+        body: {
+          backgroundColor: "#393e46",
+        },
+        footer: {
+          separator: false,
+        },
+      },
+    }
+  })
+  return client.replyMessage(event.replyToken, [
+    {
+      type: "text",
+      text: "どの週のシフトを登録しますか?",
+    },
+    {
+      type: "flex",
+      altText: "週を選択してください",
+      contents: {
+        type: "carousel",
+        contents: weekBubbles,
+      },
+    },
+  ]);
 }
 
 app.listen(PORT);
