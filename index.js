@@ -1,77 +1,94 @@
-// CommonJS
-const line = require('@line/bot-sdk');
-const { join } = require("path");
-const { readFileSync } = require("fs");
-const {richMenuObjectA, richMenuObjectB} = require('./rich_menu_object.js');
+"use strict";
+
+const express = require("express");
+const line = require("@line/bot-sdk");
+const sqlite3 = require("sqlite3");
 
 const config = {
   channelSecret: process.env.CHANNEL_SECRET,
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
 };
+const client = new line.Client(config);
+const PORT = process.env.PORT || 3000;
+const app = express();
+const db = new sqlite3.Database("./main.db");
+db.run(`
+    create table if not exists users(
+      userId text primary key, 
+      nickname text
+    )`);
+db.run(`
+    create table if not exists shifts(
+      shift_id integer primary key autoincrement,
+      userId text,
+      start_date text,
+      start_time text,
+      end_date text,
+      end_time text
+    )`);
 
-client = new line.Client(config);
+app.post("/", line.middleware(config), (req, res) => {
+  Promise.all(req.body.events.map(handleEvent)).then((result) =>
+    res.json(result)
+  );
+});
 
-const reset = async() => {
-  // 全 alias を選択する
-  client.getRichMenuAliasList().then((res) => {
-    for(var richMenu of res.aliases) {
-      // alias を削除する
-      client.deleteRichMenuAlias(richMenu.richMenuAliasId)
+async function handleEvent(event) {
+  switch (event.type) {
+    case "message":
+      if (event.massage.type !== "text") return Promise.resolve(null);
+      return handleMassageEvent(event);
+
+    case "postback":
+      return handlePostbackEvent(event);
+
+    default:
+      return Promise.resolve(null);
+  }
+}
+
+function handleMassageEvent(event) {
+  const userId = event.sourse.userId;
+  const text = event.message.text;
+
+  db.serialize(() => {
+    db.run(`insert or ignore into users values("${userId}", "")`);
+
+    if (text.match(/登録/)) {
+      return getWeekBubbleMassage(event);
+    } else {
+      return getReplayTextMessage(event, `${text} とは？`);
     }
-  })
+  });
+}
 
-  // 全リッチメニューを選択する
-  client.getRichMenuList().then((res) => {
-    for(var richMenu of res) {
-      // リッチメニューを削除する
-      client.deleteRichMenu(richMenu.richMenuId)
+function getWeekBubbleMassage(event) {
+  const userId = event.sourse.userId;
+  const data = event.postback.data;
+
+  db.serialize(() => {
+    db.run(`insert or ignore into users values("${userId}", "")`);
+
+    if (data.match(/^#[0-9]/)) {
+      const state = data[1];
+
+      switch (state) {
+        case "0":
+        case "1":
+        case "2":
+        case "3":
+        case "4":
+        case "5":
+      }
+    } else {
+      return getReplayTextMessage(event, `${text} とは？`);
     }
-  })
+  });
 }
 
-// rich_menu_object でリッチメニューの構成を指定する
-// リッチメニューオブジェクト: https://developers.line.biz/ja/reference/messaging-api/#rich-menu-object
-const createRichMenu = async (richMenuObject) => {
-  return await client.createRichMenu(
-    richMenuObject
-  )
+function getReplayTextMessage(event, text) {
+  return client.replyMessage(event.replyToken, {
+    type: "text",
+    text: text,
+  });
 }
-
-// リッチメニューに画像をアップロードして添付する
-const setRichMenuImage = async (richMenuId, path) => {
-  const filepath = join(__dirname, path);
-  const buffer = readFileSync(filepath);
-
-  const res = await client.setRichMenuImage(richMenuId, buffer);
-}
-
-// デフォルトのリッチメニューを設定する
-const setDefaultRichMenu = async (richMenuId) => {
-  return await client.setDefaultRichMenu(richMenuId)
-}
-
-// リッチメニューの alias の登録
-const setRichMenuAlias = async (richMenuId, richMenuAliasId) => {
-  return await client.createRichMenuAlias(richMenuId, richMenuAliasId)
-}
-
-const main = async () => {
-  // 2. リッチメニューA（richmenu-a）を作成する
-  const richMenuAId = await createRichMenu(richMenuObjectA())
-  // 3. リッチメニューAに画像をアップロードする
-  await setRichMenuImage(richMenuAId, '../public/richmenu-a.png')
-  // 4. リッチメニューB（richmenu-b）を作成する
-  const richMenuBId = await createRichMenu(richMenuObjectB())
-  // 5. リッチメニューBに画像をアップロードする
-  await setRichMenuImage(richMenuBId, '../public/richmenu-b.png')
-  // 6. リッチメニューAをデフォルトのリッチメニューにする
-  await setDefaultRichMenu(richMenuAId)
-  // 7. リッチメニューエイリアスAを作成する
-  await setRichMenuAlias(richMenuAId, 'richmenu-alias-a')
-  // 8. リッチメニューエイリアスBを作成する
-  await setRichMenuAlias(richMenuBId, 'richmenu-alias-b')
-  console.log('success')
-}
-
-reset()
-main()
