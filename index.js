@@ -34,6 +34,7 @@ app.post("/", line.middleware(config), (req, res) => {
 });
 
 async function handleEvent(event) {
+  console.log(event);
   switch (event.type) {
     case "message":
       if (event.massage.type !== "text") return Promise.resolve(null);
