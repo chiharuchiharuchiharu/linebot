@@ -424,7 +424,7 @@ function getRegisterBubbleMessage(event) {
                       action: {
                         type: "postback",
                         label: "register",
-                        data: "#5 cnacel",
+                        data: "#5 cancel",
                         displayText: "キャンセル",
                       },
                     },
@@ -452,7 +452,6 @@ function getConfirmMessage(event) {
   if (operation == "cancel") {
     return getReplayTextMessage(event, "キャンセルしました");
   } else {
-    console.log({ event });
     const data = JSON.parse(event.postback.data.split(" ")[2]);
     return getReplayTextMessage(event, "登録しました");
   }
