@@ -424,7 +424,7 @@ function getRegisterBubbleMessage(event) {
                       action: {
                         type: "postback",
                         label: "register",
-                        data: "#5 cancel",
+                        data: `#5 cancel ${JSON.stringify(data)}`,
                         displayText: "キャンセル",
                       },
                     },
