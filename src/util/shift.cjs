@@ -79,6 +79,7 @@ exports.deleteShifts = deleteShifts;
 
 // 削除するシフトを聞く
 exports.askDeleteShifts = async function (event) {
+  const userId = event.source.userId;
   // status を削除モードに変更
   await global.pool
     .query(`update users set status='del-shifts' where user_id='${userId}'`)
