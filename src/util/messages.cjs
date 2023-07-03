@@ -87,28 +87,41 @@ exports.getDayBubbleMessage = function (event) {
   const dates = getWeekdates(selectedFirstDate);
 
   const days = ["月", "火", "水", "木", "金", "土", "日"];
-  const content = dates.map((date, i) => {
+
+  const dayBubbles = dates.map((date, i) => {
     return {
-      type: "box",
-      layout: "vertical",
-      contents: [
-        {
-          type: "text",
-          text: `${date}(${days[i]})`,
-          size: "lg",
+      type: "bubble",
+      size: "micro",
+      body: {
+        type: "box",
+        layout: "vertical",
+        contents: [
+          {
+            type: "text",
+            text: `~${date}(${days[i]})`,
+            color: "#ffffff",
+            size: "xl",
+            margin: "sm",
+          },
+        ],
+        action: {
+          type: "postback",
+          label: "day",
+          data: `#2 ${date}`,
+          displayText: `${date}(${days[i]})`,
         },
-      ],
-      backgroundColor: "#FFD876",
-      justifyContent: "center",
-      alignItems: "center",
-      cornerRadius: "lg",
-      offsetEnd: "none",
-      width: "160px",
-      action: {
-        type: "postback",
-        label: "day",
-        data: `#2 ${date}`,
-        displayText: `${date}(${days[i]})`,
+        spacing: "sm",
+        height: "150px",
+        alignItems: "center",
+        justifyContent: "center",
+      },
+      styles: {
+        body: {
+          backgroundColor: "#393e46",
+        },
+        footer: {
+          separator: false,
+        },
       },
     };
   });
@@ -116,84 +129,14 @@ exports.getDayBubbleMessage = function (event) {
   return global.client.replyMessage(event.replyToken, [
     {
       type: "text",
-      text: "どの日のシフトを登録しますか?",
+      text: "どの週のシフトを登録しますか?",
     },
     {
       type: "flex",
-      altText: "日を選択してください",
+      altText: "週を選択してください",
       contents: {
         type: "carousel",
-        contents: [
-          {
-            type: "bubble",
-            size: "giga",
-            body: {
-              type: "box",
-              layout: "vertical",
-              contents: [
-                {
-                  type: "box",
-                  layout: "horizontal",
-                  contents: [content[0], content[1]],
-                  height: "160px",
-                  justifyContent: "space-evenly",
-                },
-                {
-                  type: "box",
-                  layout: "horizontal",
-                  contents: [content[2], content[3]],
-                  height: "160px",
-                  justifyContent: "space-evenly",
-                },
-                {
-                  type: "box",
-                  layout: "horizontal",
-                  contents: [content[4], content[5]],
-                  height: "160px",
-                  justifyContent: "space-evenly",
-                },
-                {
-                  type: "box",
-                  layout: "horizontal",
-                  contents: [
-                    content[6],
-                    {
-                      type: "box",
-                      layout: "vertical",
-                      contents: [
-                        {
-                          type: "text",
-                          text: "キャンセル",
-                          size: "lg",
-                        },
-                      ],
-                      backgroundColor: "#FFD876",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      cornerRadius: "lg",
-                      offsetStart: "none",
-                      width: "160px",
-                      action: {
-                        type: "postback",
-                        label: "day",
-                        data: "#2 cancel",
-                        displayText: "キャンセル",
-                      },
-                    },
-                  ],
-                  height: "160px",
-                  justifyContent: "space-evenly",
-                },
-              ],
-              spacing: "md",
-            },
-            styles: {
-              footer: {
-                separator: false,
-              },
-            },
-          },
-        ],
+        contents: weekBubbles,
       },
     },
   ]);
