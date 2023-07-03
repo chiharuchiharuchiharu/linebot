@@ -1,0 +1,261 @@
+{
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "size": "micro",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "8時"
+              }
+            ],
+            "backgroundColor": "#ffd876",
+            "justifyContent": "center",
+            "alignItems": "center",
+            "cornerRadius": "xxl",
+            "action": {
+              "type": "postback",
+              "label": "time",
+              "data": "#4 8",
+              "displayText": "8時"
+            }
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "9時"
+              }
+            ],
+            "backgroundColor": "#ffd876",
+            "justifyContent": "center",
+            "alignItems": "center",
+            "cornerRadius": "xxl",
+            "action": {
+              "type": "postback",
+              "label": "time",
+              "data": "#4 9",
+              "displayText": "9時"
+            }
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "10時"
+              }
+            ],
+            "backgroundColor": "#ffd876",
+            "justifyContent": "center",
+            "alignItems": "center",
+            "cornerRadius": "xxl",
+            "action": {
+              "type": "postback",
+              "label": "time",
+              "data": "#4 10",
+              "displayText": "10時"
+            }
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "11時"
+              }
+            ],
+            "backgroundColor": "#ffd876",
+            "justifyContent": "center",
+            "alignItems": "center",
+            "cornerRadius": "xxl",
+            "action": {
+              "type": "postback",
+              "label": "time",
+              "data": "#4 11",
+              "displayText": "11時"
+            }
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "12時"
+              }
+            ],
+            "backgroundColor": "#ffd876",
+            "justifyContent": "center",
+            "alignItems": "center",
+            "cornerRadius": "xxl",
+            "action": {
+              "type": "postback",
+              "label": "time",
+              "data": "#4 12",
+              "displayText": "12時"
+            }
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "13時"
+              }
+            ],
+            "backgroundColor": "#ffd876",
+            "justifyContent": "center",
+            "alignItems": "center",
+            "cornerRadius": "xxl",
+            "action": {
+              "type": "postback",
+              "label": "time",
+              "data": "#4 13",
+              "displayText": "13時"
+            }
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "14時"
+              }
+            ],
+            "backgroundColor": "#ffd876",
+            "justifyContent": "center",
+            "alignItems": "center",
+            "cornerRadius": "xxl",
+            "action": {
+              "type": "postback",
+              "label": "time",
+              "data": "#4 14",
+              "displayText": "14時"
+            }
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "15時"
+              }
+            ],
+            "backgroundColor": "#ffd876",
+            "justifyContent": "center",
+            "alignItems": "center",
+            "cornerRadius": "xxl",
+            "action": {
+              "type": "postback",
+              "label": "time",
+              "data": "#4 15",
+              "displayText": "15時"
+            }
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "16時"
+              }
+            ],
+            "backgroundColor": "#ffd876",
+            "justifyContent": "center",
+            "alignItems": "center",
+            "cornerRadius": "xxl",
+            "action": {
+              "type": "postback",
+              "label": "time",
+              "data": "#4 16",
+              "displayText": "16時"
+            }
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "17時"
+              }
+            ],
+            "backgroundColor": "#ffd876",
+            "justifyContent": "center",
+            "alignItems": "center",
+            "cornerRadius": "xxl",
+            "action": {
+              "type": "postback",
+              "label": "time",
+              "data": "#4 17",
+              "displayText": "17時"
+            }
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "18時"
+              }
+            ],
+            "backgroundColor": "#ffd876",
+            "justifyContent": "center",
+            "alignItems": "center",
+            "cornerRadius": "xxl",
+            "action": {
+              "type": "postback",
+              "label": "time",
+              "data": "#4 18",
+              "displayText": "18時"
+            }
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "19時"
+              }
+            ],
+            "backgroundColor": "#ffd876",
+            "justifyContent": "center",
+            "alignItems": "center",
+            "cornerRadius": "xxl",
+            "action": {
+              "type": "postback",
+              "label": "time",
+              "data": "#4 19",
+              "displayText": "19時"
+            }
+          }
+        ],
+        "spacing": "md"
+      },
+      "styles": {
+        "footer": {
+          "separator": false
+        }
+      }
+    }
+  ]
+}

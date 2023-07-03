@@ -1,137 +1,185 @@
 {
-    "type": "carousel",
-    "contents": [
-      {
-        "type": "bubble",
-        "size": "micro",
-        "body": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "text",
-              "text": "7/24(月)",
-              "size": "xl"
-            },
-            {
-              "type": "text",
-              "text": "〜7/30(日)",
-              "size": "xl"
-            }
-          ],
-          "height": "150px",
-          "justifyContent": "center",
-          "alignItems": "center",
-          "action": {
-            "type": "message",
-            "label": "week",
-            "text": "7/24-7/30"
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "size": "micro",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "7/21(月)",
+            "color": "#ffffff",
+            "size": "xl",
+            "align": "start",
+            "gravity": "center",
+            "wrap": true,
+            "margin": "sm"
+          },
+          {
+            "type": "text",
+            "text": "~7/27(日)",
+            "color": "#ffffff",
+            "size": "xl",
+            "margin": "sm"
           }
+        ],
+        "action": {
+          "type": "postback",
+          "label": "action",
+          "data": "#1 7/21 - 7/27",
+          "displayText": "7/21 - 7/7"
         },
-        "styles": {
-          "footer": {
-            "separator": false
-          }
-        }
+        "spacing": "sm",
+        "height": "150px",
+        "alignItems": "center",
+        "justifyContent": "center"
       },
-      {
-        "type": "bubble",
-        "size": "micro",
+      "styles": {
         "body": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "text",
-              "text": "7/31(月)",
-              "size": "xl"
-            },
-            {
-              "type": "text",
-              "text": "〜8/6(日)",
-              "size": "xl"
-            }
-          ],
-          "height": "150px",
-          "justifyContent": "center",
-          "alignItems": "center",
-          "action": {
-            "type": "message",
-            "label": "week",
-            "text": "7/31-8/6"
-          }
+          "backgroundColor": "#393e46"
         },
-        "styles": {
-          "footer": {
-            "separator": false
-          }
-        }
-      },
-      {
-        "type": "bubble",
-        "size": "micro",
-        "body": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "text",
-              "text": "8/7(月)",
-              "size": "xl"
-            },
-            {
-              "type": "text",
-              "text": "〜8/13(日)",
-              "size": "xl"
-            }
-          ],
-          "height": "150px",
-          "justifyContent": "center",
-          "alignItems": "center",
-          "action": {
-            "type": "message",
-            "label": "week",
-            "text": "8/7-8/13"
-          }
-        },
-        "styles": {
-          "footer": {
-            "separator": false
-          }
-        }
-      },
-      {
-        "type": "bubble",
-        "size": "micro",
-        "body": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "text",
-              "text": "8/14(月)",
-              "size": "xl"
-            },
-            {
-              "type": "text",
-              "text": "〜8/20(日)",
-              "size": "xl"
-            }
-          ],
-          "height": "150px",
-          "justifyContent": "center",
-          "alignItems": "center",
-          "action": {
-            "type": "message",
-            "label": "week",
-            "text": "8/14-8/20"
-          }
-        },
-        "styles": {
-          "footer": {
-            "separator": false
-          }
+        "footer": {
+          "separator": false
         }
       }
-    ]
-  }
+    },
+    {
+      "type": "bubble",
+      "size": "micro",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "8/3(月)",
+            "color": "#ffffff",
+            "size": "xl",
+            "align": "start",
+            "gravity": "center",
+            "wrap": true,
+            "margin": "sm"
+          },
+          {
+            "type": "text",
+            "text": "~8/9(日)",
+            "color": "#ffffff",
+            "size": "xl",
+            "margin": "sm"
+          }
+        ],
+        "action": {
+          "type": "postback",
+          "label": "action",
+          "data": "#1 8/3 - 8/9",
+          "displayText": "8/3 - 8/9"
+        },
+        "spacing": "sm",
+        "height": "150px",
+        "alignItems": "center",
+        "justifyContent": "center"
+      },
+      "styles": {
+        "body": {
+          "backgroundColor": "#393e46"
+        },
+        "footer": {
+          "separator": false
+        }
+      }
+    },
+    {
+      "type": "bubble",
+      "size": "micro",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "8/10(月)",
+            "color": "#ffffff",
+            "size": "xl",
+            "align": "start",
+            "gravity": "center",
+            "wrap": true,
+            "margin": "sm"
+          },
+          {
+            "type": "text",
+            "text": "~8/16(日)",
+            "color": "#ffffff",
+            "size": "xl",
+            "margin": "sm"
+          }
+        ],
+        "action": {
+          "type": "postback",
+          "label": "action",
+          "data": "#1 8/10 - 8/17",
+          "displayText": "8/10 - 8/17"
+        },
+        "spacing": "sm",
+        "height": "150px",
+        "alignItems": "center",
+        "justifyContent": "center"
+      },
+      "styles": {
+        "body": {
+          "backgroundColor": "#393e46"
+        },
+        "footer": {
+          "separator": false
+        }
+      }
+    },
+    {
+      "type": "bubble",
+      "size": "micro",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "8/17(月)",
+            "color": "#ffffff",
+            "size": "xl",
+            "align": "start",
+            "gravity": "center",
+            "wrap": true,
+            "margin": "sm"
+          },
+          {
+            "type": "text",
+            "text": "~8/23(日)",
+            "color": "#ffffff",
+            "size": "xl",
+            "margin": "sm"
+          }
+        ],
+        "action": {
+          "type": "postback",
+          "label": "action",
+          "data": "#1 8/17 - 8/24",
+          "displayText": "8/17 - 8/24"
+        },
+        "spacing": "sm",
+        "height": "150px",
+        "alignItems": "center",
+        "justifyContent": "center"
+      },
+      "styles": {
+        "body": {
+          "backgroundColor": "#393e46"
+        },
+        "footer": {
+          "separator": false
+        }
+      }
+    }
+  ]
+}

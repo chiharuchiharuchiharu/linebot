@@ -1,105 +1,20 @@
-"use strict";
+const { getWeekdates, getWeekLastDate, getUserInfo } = require("./util.cjs");
 
-const express = require("express");
-const line = require("@line/bot-sdk");
-const sqlite3 = require("sqlite3");
-
-const config = {
-  channelSecret: process.env.CHANNEL_SECRET,
-  channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
-};
-const client = new line.Client(config);
-const PORT = process.env.PORT || 3000;
-const app = express();
-const db = new sqlite3.Database("./main.db");
-db.run(`
-    create table if not exists users(
-      userId text primary key, 
-      nickname text
-    )`);
-db.run(`
-    create table if not exists shifts(
-      shift_id integer primary key autoincrement,
-      userId text,
-      start_date text,
-      start_time text,
-      end_date text,
-      end_time text
-    )`);
-
-app.post("/", line.middleware(config), (req, res) => {
-  Promise.all(req.body.events.map(handleEvent)).then((result) =>
-    res.json(result)
-  );
-});
-
-async function handleEvent(event) {
-  switch (event.type) {
-    case "message":
-      if (event.message.type !== "text") return Promise.resolve(null);
-      return handleMassageEvent(event);
-
-    case "postback":
-      return handlePostbackEvent(event);
-
-    default:
-      return Promise.resolve(null);
-  }
-}
-
-function handleMassageEvent(event) {
-  const userId = event.source.userId;
-  const text = event.message.text;
-
-  db.serialize(() => {
-    db.run(`insert or ignore into users values("${userId}", "")`);
-
-    if (text.match(/登録/)) {
-      return getWeekBubbleMessage(event);
-    } else {
-      return getReplayTextMessage(event, `${text} とは？`);
-    }
+// テキストメッセージを送信する
+function getReplayTextMessages(event, texts) {
+  const message = texts.map((text) => {
+    return {
+      type: "text",
+      text: text,
+    };
   });
+  return global.client.replyMessage(event.replyToken, message);
 }
+exports.getReplayTextMessages = getReplayTextMessages;
 
-function handlePostbackEvent(event) {
-  const userId = event.source.userId;
-  const data = event.postback.data;
-
-  db.serialize(() => {
-    db.run(`insert or ignore into users values("${userId}", "")`);
-
-    if (data.match(/^#[0-9]/)) {
-      const state = data[1];
-
-      switch (state) {
-        case "0":
-          return getWeekBubbleMessage(event);
-        case "1":
-          return getDayBubbleMessage(event);
-        case "2":
-        case "3":
-          return getTimeBubbleMessage(event, parseInt(state));
-        case "4":
-          return getRegisterBubbleMessage(event);
-        case "5":
-          return getConfirmMessage(event);
-      }
-    } else {
-      return getReplayTextMessage(event, `${text} とは？`);
-    }
-  });
-}
-
-function getReplayTextMessage(event, text) {
-  return client.replyMessage(event.replyToken, {
-    type: "text",
-    text: text,
-  });
-}
-
-function getWeekBubbleMessage(event) {
-  const weeks = ["6/26", "7/3", "7/10"];
+// どの週かを選択するバブルメッセージを送信する
+exports.getWeekBubbleMessage = function (event) {
+  const weeks = ["6/26", "7/3", "7/10", "7/17", "7/24", "7/31"];
   const weekBubbles = weeks.map((first) => {
     const last = getWeekLastDate(first);
 
@@ -149,7 +64,8 @@ function getWeekBubbleMessage(event) {
       },
     };
   });
-  return client.replyMessage(event.replyToken, [
+
+  return global.client.replyMessage(event.replyToken, [
     {
       type: "text",
       text: "どの週のシフトを登録しますか?",
@@ -163,9 +79,10 @@ function getWeekBubbleMessage(event) {
       },
     },
   ]);
-}
+};
 
-function getDayBubbleMessage(event) {
+// どの日かを選択するバブルメッセージを送信する
+exports.getDayBubbleMessage = function (event) {
   const selectedFirstDate = event.postback.data.split(" ")[1];
   const dates = getWeekdates(selectedFirstDate);
 
@@ -196,7 +113,7 @@ function getDayBubbleMessage(event) {
     };
   });
 
-  return client.replyMessage(event.replyToken, [
+  return global.client.replyMessage(event.replyToken, [
     {
       type: "text",
       text: "どの日のシフトを登録しますか?",
@@ -280,9 +197,10 @@ function getDayBubbleMessage(event) {
       },
     },
   ]);
-}
+};
 
-function getTimeBubbleMessage(event, state) {
+// 時間を選択するバブルメッセージを送信する
+exports.getTimeBubbleMessage = function (event, state) {
   let data = {};
 
   const times = [];
@@ -324,7 +242,7 @@ function getTimeBubbleMessage(event, state) {
     };
   });
 
-  return client.replyMessage(event.replyToken, [
+  return global.client.replyMessage(event.replyToken, [
     {
       type: "text",
       text: `${state == 2 ? "開始" : "終了"}時間を選択してください`,
@@ -354,13 +272,14 @@ function getTimeBubbleMessage(event, state) {
       },
     },
   ]);
-}
+};
 
-function getRegisterBubbleMessage(event) {
+// 登録をするかどうかの確認するバブルメッセージを送信する
+exports.getRegisterBubbleMessage = function (event) {
   const data = JSON.parse(event.postback.data.split(" ")[2]);
   data.end = parseInt(event.postback.data.split(" ")[1]);
 
-  return client.replyMessage(event.replyToken, [
+  return global.client.replyMessage(event.replyToken, [
     {
       type: "text",
       text: `以下の内容で登録しますか?\n> ${data.date} ${data.start}時 - ${data.end}時`,
@@ -401,7 +320,7 @@ function getRegisterBubbleMessage(event) {
                       action: {
                         type: "postback",
                         label: "register",
-                        data: `#5 yse ${JSON.stringify(data)}`,
+                        data: `#5 yes ${JSON.stringify(data)}`,
                         displayText: "はい",
                       },
                     },
@@ -424,7 +343,7 @@ function getRegisterBubbleMessage(event) {
                       action: {
                         type: "postback",
                         label: "register",
-                        data: `#5 cancel ${JSON.stringify(data)}`,
+                        data: "#5 cancel",
                         displayText: "キャンセル",
                       },
                     },
@@ -444,42 +363,73 @@ function getRegisterBubbleMessage(event) {
       },
     },
   ]);
-}
+};
 
-function getConfirmMessage(event) {
+// 確定メッセージを送信する
+exports.getConfirmMessage = async function (event) {
   const operation = event.postback.data.split(" ")[1];
 
-  console.log(event, operation);
-
   if (operation == "cancel") {
-    return getReplayTextMessage(event, "キャンセルしました");
+    return getReplayTextMessages(event, ["キャンセルしました"]);
   } else {
     const data = JSON.parse(event.postback.data.split(" ")[2]);
-    return getReplayTextMessage(event, "登録しました");
+    const userId = event.source.userId;
+    console.log("登録", data);
+
+    // nickname  を取得
+    const { nickname } = await getUserInfo(userId);
+
+    // 同じ日に同じユーザーが登録しているか
+    const { count } = await global.pool
+      .query(
+        `select count(*) from shifts where user_id='${userId}' and date='${data.date}'`
+      )
+      .then((result) => {
+        return result.rows[0];
+      });
+
+    if (count > 0) {
+      // 上書きする
+      global.pool
+        .query(
+          `update shifts set 
+            start_time=${data.start},
+            end_time=${data.end}
+          where
+            user_id='${userId}'
+            and date='${data.date}'`
+        )
+        .then(() => {
+          return getReplayTextMessages(event, ["上書きしました"]);
+        })
+        .catch((err) => {
+          console.log("err", err);
+          return getReplayTextMessages(event, ["登録に失敗しました"]);
+        });
+    } else {
+      global.pool
+        .query(
+          `insert into shifts (
+            user_id,
+            nickname,
+            date,
+            start_time,
+            end_time
+          ) values (
+            '${userId}',
+            '${nickname}',
+            '${data.date}',
+            ${data.start},
+            ${data.end}
+          )`
+        )
+        .then(() => {
+          return getReplayTextMessages(event, ["登録が完了しました"]);
+        })
+        .catch((err) => {
+          console.log("err", err);
+          return getReplayTextMessages(event, ["登録に失敗しました"]);
+        });
+    }
   }
-}
-
-function getWeekLastDate(date) {
-  const first = new Date(date);
-  const last = new Date(first.getTime() + 6 * 24 * 60 * 60 * 1000);
-
-  return `${last.getMonth() + 1}/${last.getDate()}`;
-}
-
-// 一週間分の日付を取得
-function getWeekdates(firstDate) {
-  const specifiedDate = new Date(firstDate);
-
-  const dates = [];
-  for (let i = 0; i < 7; i++) {
-    const currentDate = new Date(
-      specifiedDate.getTime() + i * 24 * 60 * 60 * 1000
-    );
-    dates.push(`${currentDate.getMonth() + 1}/${currentDate.getDate()}`);
-  }
-
-  return dates;
-}
-
-app.listen(PORT);
-console.log(`Server running at ${PORT}`);
+};

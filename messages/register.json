@@ -1,87 +1,74 @@
 {
-    "type": "carousel",
-    "contents": [
-      {
-        "type": "bubble",
-        "size": "giga",
-        "body": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "box",
-              "layout": "horizontal",
-              "contents": [
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "はい",
-                      "size": "xl",
-                      "action": {
-                        "type": "postback",
-                        "label": "register",
-                        "data": "yes",
-                        "displayText": "はい"
-                      }
-                    }
-                  ],
-                  "backgroundColor": "#FFD876",
-                  "offsetEnd": "none",
-                  "cornerRadius": "lg",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "width": "160px",
-                  "action": {
-                    "type": "postback",
-                    "label": "day",
-                    "data": "7-24",
-                    "displayText": "7/24(月)"
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "size": "giga",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "はい",
+                    "size": "lg"
                   }
-                },
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "キャンセル",
-                      "size": "xl",
-                      "action": {
-                        "type": "postback",
-                        "label": "register",
-                        "data": "cancel",
-                        "displayText": "キャンセル"
-                      }
-                    }
-                  ],
-                  "backgroundColor": "#FFD876",
-                  "offsetStart": "none",
-                  "cornerRadius": "lg",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "width": "160px",
-                  "action": {
-                    "type": "postback",
-                    "label": "day",
-                    "data": "7-25",
-                    "displayText": "7/25(火)"
-                  }
+                ],
+                "backgroundColor": "#FFD876",
+                "justifyContent": "center",
+                "alignItems": "center",
+                "cornerRadius": "lg",
+                "offsetEnd": "none",
+                "width": "165px",
+                "action": {
+                  "type": "postback",
+                  "label": "register",
+                  "data": "yse",
+                  "displayText": "はい"
                 }
-              ],
-              "height": "40px",
-              "justifyContent": "space-evenly"
-            }
-          ],
-          "spacing": "md"
-        },
-        "styles": {
-          "footer": {
-            "separator": false
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "キャンセル",
+                    "size": "lg"
+                  }
+                ],
+                "backgroundColor": "#FFD876",
+                "justifyContent": "center",
+                "alignItems": "center",
+                "cornerRadius": "lg",
+                "offsetStart": "none",
+                "width": "165px",
+                "action": {
+                  "type": "postback",
+                  "label": "register",
+                  "data": "cnacel",
+                  "displayText": "キャンセル"
+                }
+              }
+            ],
+            "height": "40px",
+            "justifyContent": "space-evenly"
           }
+        ]
+      },
+      "styles": {
+        "footer": {
+          "separator": false
         }
       }
-    ]
-  }
+    }
+  ]
+}

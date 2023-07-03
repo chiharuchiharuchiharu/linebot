@@ -1,237 +1,237 @@
 {
-    "type": "carousel",
-    "contents": [
-      {
-        "type": "bubble",
-        "size": "giga",
-        "body": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "box",
-              "layout": "horizontal",
-              "contents": [
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "7/24(月)",
-                      "size": "xxl"
-                    }
-                  ],
-                  "backgroundColor": "#FFD876",
-                  "offsetEnd": "none",
-                  "cornerRadius": "lg",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "width": "160px",
-                  "action": {
-                    "type": "postback",
-                    "label": "day",
-                    "data": "7-24",
-                    "displayText": "7/24(月)"
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "size": "giga",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "7/21(月)",
+                    "size": "lg"
                   }
-                },
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "7/25(火)",
-                      "size": "xxl"
-                    }
-                  ],
-                  "backgroundColor": "#FFD876",
-                  "offsetStart": "none",
-                  "cornerRadius": "lg",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "width": "160px",
-                  "action": {
-                    "type": "postback",
-                    "label": "day",
-                    "data": "7-25",
-                    "displayText": "7/25(火)"
-                  }
+                ],
+                "backgroundColor": "#FFD876",
+                "justifyContent": "center",
+                "alignItems": "center",
+                "cornerRadius": "lg",
+                "offsetEnd": "none",
+                "width": "160px",
+                "action": {
+                  "type": "postback",
+                  "label": "day",
+                  "data": "7-21",
+                  "displayText": "7/21(月)"
                 }
-              ],
-              "height": "160px",
-              "justifyContent": "space-evenly"
-            },
-            {
-              "type": "box",
-              "layout": "horizontal",
-              "contents": [
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "7/26(水)",
-                      "size": "xxl"
-                    }
-                  ],
-                  "backgroundColor": "#FFD876",
-                  "offsetEnd": "none",
-                  "cornerRadius": "lg",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "width": "160px",
-                  "action": {
-                    "type": "postback",
-                    "label": "day",
-                    "data": "7-26",
-                    "displayText": "7/26(水)"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "7/22(火)",
+                    "size": "lg"
                   }
-                },
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "7/27(木)",
-                      "size": "xxl"
-                    }
-                  ],
-                  "backgroundColor": "#FFD876",
-                  "offsetStart": "none",
-                  "cornerRadius": "lg",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "width": "160px",
-                  "action": {
-                    "type": "postback",
-                    "label": "day",
-                    "data": "7-27",
-                    "displayText": "7/27(木)"
-                  }
+                ],
+                "backgroundColor": "#FFD876",
+                "justifyContent": "center",
+                "alignItems": "center",
+                "cornerRadius": "lg",
+                "offsetStart": "none",
+                "width": "160px",
+                "action": {
+                  "type": "postback",
+                  "label": "day",
+                  "data": "7-22",
+                  "displayText": "7/22(火)"
                 }
-              ],
-              "height": "160px",
-              "justifyContent": "space-evenly"
-            },
-            {
-              "type": "box",
-              "layout": "horizontal",
-              "contents": [
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "7/28(金)",
-                      "size": "xxl"
-                    }
-                  ],
-                  "backgroundColor": "#FFD876",
-                  "offsetEnd": "none",
-                  "cornerRadius": "lg",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "width": "160px",
-                  "action": {
-                    "type": "postback",
-                    "label": "day",
-                    "data": "7-28",
-                    "displayText": "7/28(金)"
+              }
+            ],
+            "height": "160px",
+            "justifyContent": "space-evenly"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "7/23(水)",
+                    "size": "lg"
                   }
-                },
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "7/29(土)",
-                      "size": "xxl"
-                    }
-                  ],
-                  "backgroundColor": "#FFD876",
-                  "offsetStart": "none",
-                  "cornerRadius": "lg",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "width": "160px",
-                  "action": {
-                    "type": "postback",
-                    "label": "day",
-                    "data": "7-29",
-                    "displayText": "7/29(土)"
-                  }
+                ],
+                "backgroundColor": "#FFD876",
+                "justifyContent": "center",
+                "alignItems": "center",
+                "cornerRadius": "lg",
+                "offsetEnd": "none",
+                "width": "160px",
+                "action": {
+                  "type": "postback",
+                  "label": "day",
+                  "data": "7-23",
+                  "displayText": "7/23(水)"
                 }
-              ],
-              "height": "160px",
-              "justifyContent": "space-evenly"
-            },
-            {
-              "type": "box",
-              "layout": "horizontal",
-              "contents": [
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "7/30(日)",
-                      "size": "xxl"
-                    }
-                  ],
-                  "backgroundColor": "#FFD876",
-                  "offsetEnd": "none",
-                  "cornerRadius": "lg",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "width": "160px",
-                  "action": {
-                    "type": "postback",
-                    "label": "day",
-                    "data": "7-30",
-                    "displayText": "7/30(日)"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "7/24(木)",
+                    "size": "lg"
                   }
-                },
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "キャンセル",
-                      "size": "xxl"
-                    }
-                  ],
-                  "backgroundColor": "#FFD876",
-                  "offsetStart": "none",
-                  "cornerRadius": "lg",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "width": "160px",
-                  "action": {
-                    "type": "postback",
-                    "label": "day",
-                    "data": "cancel",
-                    "displayText": "キャンセル"
-                  }
+                ],
+                "backgroundColor": "#FFD876",
+                "justifyContent": "center",
+                "alignItems": "center",
+                "cornerRadius": "lg",
+                "offsetStart": "none",
+                "width": "160px",
+                "action": {
+                  "type": "postback",
+                  "label": "day",
+                  "data": "7-24",
+                  "displayText": "7/24(木)"
                 }
-              ],
-              "height": "160px",
-              "justifyContent": "space-evenly"
-            }
-          ],
-          "spacing": "md"
-        },
-        "styles": {
-          "footer": {
-            "separator": false
+              }
+            ],
+            "height": "160px",
+            "justifyContent": "space-evenly"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "7/25(金)",
+                    "size": "lg"
+                  }
+                ],
+                "backgroundColor": "#FFD876",
+                "justifyContent": "center",
+                "alignItems": "center",
+                "cornerRadius": "lg",
+                "offsetEnd": "none",
+                "width": "160px",
+                "action": {
+                  "type": "postback",
+                  "label": "day",
+                  "data": "7-25",
+                  "displayText": "7/25(金)"
+                }
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "7/26(土)",
+                    "size": "lg"
+                  }
+                ],
+                "backgroundColor": "#FFD876",
+                "justifyContent": "center",
+                "alignItems": "center",
+                "cornerRadius": "lg",
+                "offsetStart": "none",
+                "width": "160px",
+                "action": {
+                  "type": "postback",
+                  "label": "day",
+                  "data": "7-26",
+                  "displayText": "7/26(土)"
+                }
+              }
+            ],
+            "height": "160px",
+            "justifyContent": "space-evenly"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "7/27(日)",
+                    "size": "lg"
+                  }
+                ],
+                "backgroundColor": "#FFD876",
+                "justifyContent": "center",
+                "alignItems": "center",
+                "cornerRadius": "lg",
+                "offsetEnd": "none",
+                "width": "160px",
+                "action": {
+                  "type": "postback",
+                  "label": "day",
+                  "data": "7-27",
+                  "displayText": "7/27(日)"
+                }
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "キャンセル",
+                    "size": "lg"
+                  }
+                ],
+                "backgroundColor": "#FFD876",
+                "justifyContent": "center",
+                "alignItems": "center",
+                "cornerRadius": "lg",
+                "offsetStart": "none",
+                "width": "160px",
+                "action": {
+                  "type": "postback",
+                  "label": "day",
+                  "data": "cancel",
+                  "displayText": "キャンセル"
+                }
+              }
+            ],
+            "height": "160px",
+            "justifyContent": "space-evenly"
           }
+        ],
+        "spacing": "md"
+      },
+      "styles": {
+        "footer": {
+          "separator": false
         }
       }
-    ]
-  }
+    }
+  ]
+}
