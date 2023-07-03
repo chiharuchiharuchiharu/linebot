@@ -98,7 +98,7 @@ exports.getDayBubbleMessage = function (event) {
         contents: [
           {
             type: "text",
-            text: `~${date}(${days[i]})`,
+            text: `${date}(${days[i]})`,
             color: "#ffffff",
             size: "xl",
             margin: "sm",
