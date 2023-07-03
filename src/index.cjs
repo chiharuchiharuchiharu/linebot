@@ -82,7 +82,7 @@ async function handleMessageEvent(event) {
   const text = event.message.text;
 
   // DB にユーザーが登録されていない場合は追加
-  addUser(userId);
+  await addUser(userId);
 
   // nickname と status を取得
   const { nickname, status } = await getUserInfo(userId);
@@ -90,29 +90,29 @@ async function handleMessageEvent(event) {
   if (status === "del-shifts") {
     return await deleteShifts(event);
   } else if (status === "rg-nick") {
-    registerNickname(event);
+    return await registerNickname(event);
   } else if (!nickname) {
-    askNickname(event);
+    return await askNickname(event);
   } else if (text.match(/ニックネーム/)) {
-    askNickname(event, nickname);
+    return await askNickname(event, nickname);
   } else if (text.match(/登録/)) {
     return getWeekBubbleMessage(event);
   } else if (text.match(/一覧/)) {
     return await getShiftListMessage(event);
   } else if (text.match(/削除/)) {
-    askDeleteShifts(event);
+    return await askDeleteShifts(event);
   } else {
     return getReplayTextMessages(event, [`${text} とは?`]);
   }
 }
 
 // type == "postback" の場合
-function handlePostbackEvent(event) {
+async function handlePostbackEvent(event) {
   const userId = event.source.userId;
   const data = event.postback.data;
 
   // DB にユーザーが登録されていない場合は追加
-  addUser(userId);
+  await addUser(userId);
 
   if (data.match(/^#[0-9]/)) {
     const state = data[1];
