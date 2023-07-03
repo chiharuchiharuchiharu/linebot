@@ -136,7 +136,7 @@ exports.getDayBubbleMessage = function (event) {
       altText: "週を選択してください",
       contents: {
         type: "carousel",
-        contents: weekBubbles,
+        contents: dayBubbles,
       },
     },
   ]);
