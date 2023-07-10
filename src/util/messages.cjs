@@ -163,7 +163,7 @@ exports.getTimeBubbleMessage = function (event, state) {
   for (let i = startTime; i <= endTime; i++) times.push(i);
 
   const content = times.map((time) => {
-    return{
+    return {
       type: "box",
       layout: "vertical",
       contents: [
@@ -184,10 +184,10 @@ exports.getTimeBubbleMessage = function (event, state) {
         data: `#${state + 1} ${time} ${JSON.stringify(data)}`,
         displayText: `${time}時`,
       },
-    }
+    };
   });
 
-// content を半分に分ける
+  // content を半分に分ける
   const half = Math.ceil(content.length / 2);
   const leftContent = content.slice(0, half);
   const rightContent = content.slice(half);
@@ -250,71 +250,56 @@ exports.getRegisterBubbleMessage = function (event) {
         contents: [
           {
             type: "bubble",
-            size: "giga",
             body: {
               type: "box",
-              layout: "vertical",
+              layout: "horizontal",
               contents: [
                 {
                   type: "box",
-                  layout: "horizontal",
+                  layout: "vertical",
                   contents: [
                     {
-                      type: "box",
-                      layout: "vertical",
-                      contents: [
-                        {
-                          type: "text",
-                          text: "はい",
-                          size: "lg",
-                        },
-                      ],
-                      backgroundColor: "#FFD876",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      cornerRadius: "lg",
-                      offsetEnd: "none",
-                      width: "165px",
-                      action: {
-                        type: "postback",
-                        label: "register",
-                        data: `#5 yes ${JSON.stringify(data)}`,
-                        displayText: "はい",
-                      },
-                    },
-                    {
-                      type: "box",
-                      layout: "vertical",
-                      contents: [
-                        {
-                          type: "text",
-                          text: "キャンセル",
-                          size: "lg",
-                        },
-                      ],
-                      backgroundColor: "#FFD876",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      cornerRadius: "lg",
-                      offsetStart: "none",
-                      width: "165px",
-                      action: {
-                        type: "postback",
-                        label: "register",
-                        data: "#5 cancel",
-                        displayText: "キャンセル",
-                      },
+                      type: "text",
+                      text: "はい",
+                      color: "#ffffff",
                     },
                   ],
-                  height: "40px",
-                  justifyContent: "space-evenly",
+                  backgroundColor: "#393e46",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "50px",
+                  cornerRadius: "lg",
+                  action: {
+                    type: "postback",
+                    label: "register",
+                    data: `#5 yes ${JSON.stringify(data)}`,
+                    displayText: "はい",
+                  },
+                },
+                {
+                  type: "box",
+                  layout: "vertical",
+                  contents: [
+                    {
+                      type: "text",
+                      text: "キャンセル",
+                      color: "#ffffff",
+                    },
+                  ],
+                  backgroundColor: "#393e46",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "50px",
+                  cornerRadius: "lg",
+                  action: {
+                    type: "postback",
+                    label: "register",
+                    data: "#5 cancel",
+                    displayText: "キャンセル",
+                  },
                 },
               ],
-            },
-            styles: {
-              footer: {
-                separator: false,
-              },
+              spacing: "md",
             },
           },
         ],
