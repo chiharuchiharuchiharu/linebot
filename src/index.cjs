@@ -40,6 +40,11 @@ app.post("/", line.middleware(config), (req, res) => {
   );
 });
 
+app.get("/gas", (req, res) => {
+  console.log("ok");
+  res.json({ok: true});
+});
+
 app.get("/users", (req, res) => {
   global.pool
     .query("select * from users")
