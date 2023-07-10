@@ -149,20 +149,21 @@ exports.getTimeBubbleMessage = function (event, state) {
   const times = [];
   let startTime = 8;
   let endTime = 21;
+  const range = [8,20];
 
   if (state == 2) {
     data.date = event.postback.data.split(" ")[1];
   } else {
-    const start = parseInt(event.postback.data.split(" ")[1]);
     data = JSON.parse(event.postback.data.split(" ")[2]);
-    data.start = start;
-    startTime = start + 1;
-    endTime = 22;
+    data.start = parseInt(event.postback.data.split(" ")[1]);
+    range[0] = data.start + 1;
+    range[1] = 21;
   }
 
   for (let i = startTime; i <= endTime; i++) times.push(i);
 
   const content = times.map((time) => {
+    if(range[0] <= time && time <= range[1])
     return {
       type: "box",
       layout: "vertical",
@@ -184,6 +185,23 @@ exports.getTimeBubbleMessage = function (event, state) {
         data: `#${state + 1} ${time} ${JSON.stringify(data)}`,
         displayText: `${time}時`,
       },
+    };
+    else
+    return {
+      type: "box",
+      layout: "vertical",
+      contents: [
+        {
+          type: "text",
+          text: `${time}時`,
+          color: "#888888",
+        },
+      ],
+      backgroundColor: "#393e46",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "50px",
+      cornerRadius: "lg",
     };
   });
 
