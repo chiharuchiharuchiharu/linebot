@@ -170,9 +170,10 @@ exports.getTimeBubbleMessage = function (event, state) {
         {
           type: "text",
           text: `${time}時`,
+          color: "#ffffff",
         },
       ],
-      backgroundColor: "#000000",
+      backgroundColor: "#393e46",
       justifyContent: "center",
       alignItems: "center",
       height: "50px",
