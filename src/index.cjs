@@ -80,7 +80,7 @@ app.get("/get", (req, res) => {
     .then((result) => {
       const datum = {};
 
-      for (const item of result) {
+      result.rows.forEach((item) => {
         const date = item.date;
         const start = item.start_time.toString();
         const end = item.end_time.toString();
@@ -97,7 +97,7 @@ app.get("/get", (req, res) => {
           start: start,
           end: end,
         });
-      }
+      })
 
       res.json(datum);
     })
