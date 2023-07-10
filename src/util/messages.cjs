@@ -129,7 +129,7 @@ exports.getDayBubbleMessage = function (event) {
   return global.client.replyMessage(event.replyToken, [
     {
       type: "text",
-      text: "どの週のシフトを登録しますか?",
+      text: "どの日のシフトを登録しますか?",
     },
     {
       type: "flex",
