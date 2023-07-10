@@ -2,7 +2,12 @@ const express = require("express");
 const line = require("@line/bot-sdk");
 const { Pool } = require("pg");
 
-const { initDB, getUserInfo, addUser } = require("./util/util.cjs");
+const {
+  initDB,
+  getUserInfo,
+  addUser,
+  getWeekdates,
+} = require("./util/util.cjs");
 const {
   getReplayTextMessages,
   getWeekBubbleMessage,
@@ -42,7 +47,7 @@ app.post("/", line.middleware(config), (req, res) => {
 
 app.get("/gas", (req, res) => {
   console.log("ok");
-  res.json({ok: true});
+  res.json({ ok: true });
 });
 
 app.get("/users", (req, res) => {
@@ -59,6 +64,19 @@ app.get("/users", (req, res) => {
 app.get("/shifts", (req, res) => {
   global.pool
     .query("select * from shifts")
+    .then((result) => {
+      res.json(result.rows);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+app.get("/get", (req, res) => {
+  const day = req.query.day;
+  const days = getWeekdates(day);
+  global.pool
+    .query(`select * from shifts where date in ('${days.join("','")}')`)
     .then((result) => {
       res.json(result.rows);
     })
@@ -136,7 +154,10 @@ async function handlePostbackEvent(event) {
         return getConfirmMessage(event);
     }
   } else {
-    return getReplayTextMessages(event, [`データの形式が正しくないようです`, event.postback.data]);
+    return getReplayTextMessages(event, [
+      `データの形式が正しくないようです`,
+      event.postback.data,
+    ]);
   }
 }
 
