@@ -78,7 +78,28 @@ app.get("/get", (req, res) => {
   global.pool
     .query(`select * from shifts where date in ('${days.join("','")}')`)
     .then((result) => {
-      res.json(result.rows);
+      const datum = {};
+
+      for (const item of result) {
+        const date = item.date;
+        const start = item.start_time.toString();
+        const end = item.end_time.toString();
+
+        if (!(date in datum)) {
+          datum[date] = {
+            day: 0,
+            data: [],
+          };
+        }
+
+        datum[date].data.push({
+          name: item.nickname,
+          start: start,
+          end: end,
+        });
+      }
+
+      res.json(datum);
     })
     .catch((err) => {
       res.json(err);
