@@ -198,17 +198,87 @@ exports.getTimeBubbleMessage = function (event, state) {
         contents: [
           {
             type: "bubble",
-            size: "micro",
             body: {
               type: "box",
-              layout: "vertical",
-              contents: content,
+              layout: "horizontal",
+              contents: [
+                {
+                  type: "box",
+                  layout: "vertical",
+                  contents: [
+                    {
+                      type: "box",
+                      layout: "vertical",
+                      contents: [
+                        {
+                          type: "text",
+                          text: "9時",
+                        },
+                      ],
+                      backgroundColor: "#000000",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "50px",
+                      cornerRadius: "lg",
+                    },
+                    {
+                      type: "box",
+                      layout: "vertical",
+                      contents: [
+                        {
+                          type: "text",
+                          text: "9時",
+                        },
+                      ],
+                      backgroundColor: "#000000",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "50px",
+                      cornerRadius: "lg",
+                    },
+                  ],
+                  width: "50%",
+                  spacing: "md",
+                },
+                {
+                  type: "box",
+                  layout: "vertical",
+                  contents: [
+                    {
+                      type: "box",
+                      layout: "vertical",
+                      contents: [
+                        {
+                          type: "text",
+                          text: "9時",
+                        },
+                      ],
+                      backgroundColor: "#000000",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "50px",
+                      cornerRadius: "lg",
+                    },
+                    {
+                      type: "box",
+                      layout: "vertical",
+                      contents: [
+                        {
+                          type: "text",
+                          text: "9時",
+                        },
+                      ],
+                      backgroundColor: "#000000",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "50px",
+                      cornerRadius: "lg",
+                    },
+                  ],
+                  spacing: "md",
+                },
+              ],
               spacing: "md",
-            },
-            styles: {
-              footer: {
-                separator: false,
-              },
             },
           },
         ],
