@@ -163,7 +163,7 @@ exports.getTimeBubbleMessage = function (event, state) {
   for (let i = startTime; i <= endTime; i++) times.push(i);
 
   const content = times.map((time) => {
-    return {
+    return{
       type: "box",
       layout: "vertical",
       contents: [
@@ -172,18 +172,24 @@ exports.getTimeBubbleMessage = function (event, state) {
           text: `${time}時`,
         },
       ],
-      backgroundColor: "#ffd876",
+      backgroundColor: "#000000",
       justifyContent: "center",
       alignItems: "center",
-      cornerRadius: "xxl",
+      height: "50px",
+      cornerRadius: "lg",
       action: {
         type: "postback",
         label: "time",
         data: `#${state + 1} ${time} ${JSON.stringify(data)}`,
         displayText: `${time}時`,
       },
-    };
+    }
   });
+
+// content を半分に分ける
+  const half = Math.ceil(content.length / 2);
+  const leftContent = content.slice(0, half);
+  const rightContent = content.slice(half);
 
   return global.client.replyMessage(event.replyToken, [
     {
@@ -205,76 +211,14 @@ exports.getTimeBubbleMessage = function (event, state) {
                 {
                   type: "box",
                   layout: "vertical",
-                  contents: [
-                    {
-                      type: "box",
-                      layout: "vertical",
-                      contents: [
-                        {
-                          type: "text",
-                          text: "9時",
-                        },
-                      ],
-                      backgroundColor: "#000000",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      height: "50px",
-                      cornerRadius: "lg",
-                    },
-                    {
-                      type: "box",
-                      layout: "vertical",
-                      contents: [
-                        {
-                          type: "text",
-                          text: "9時",
-                        },
-                      ],
-                      backgroundColor: "#000000",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      height: "50px",
-                      cornerRadius: "lg",
-                    },
-                  ],
+                  contents: leftContent,
                   width: "50%",
                   spacing: "md",
                 },
                 {
                   type: "box",
                   layout: "vertical",
-                  contents: [
-                    {
-                      type: "box",
-                      layout: "vertical",
-                      contents: [
-                        {
-                          type: "text",
-                          text: "9時",
-                        },
-                      ],
-                      backgroundColor: "#000000",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      height: "50px",
-                      cornerRadius: "lg",
-                    },
-                    {
-                      type: "box",
-                      layout: "vertical",
-                      contents: [
-                        {
-                          type: "text",
-                          text: "9時",
-                        },
-                      ],
-                      backgroundColor: "#000000",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      height: "50px",
-                      cornerRadius: "lg",
-                    },
-                  ],
+                  contents: rightContent,
                   spacing: "md",
                 },
               ],
