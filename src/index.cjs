@@ -173,7 +173,7 @@ async function handlePostbackEvent(event) {
       case "5":
         return getConfirmMessage(event);
         case "9":
-          return deleteShifts(event, deta);
+          return deleteShifts(event, data);
     }
   } else {
     return getReplayTextMessages(event, [
