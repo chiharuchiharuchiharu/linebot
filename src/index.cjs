@@ -97,7 +97,7 @@ app.get("/get", (req, res) => {
           start: start,
           end: end,
         });
-      })
+      });
 
       res.json(datum);
     })
@@ -114,7 +114,11 @@ async function handleEvent(event) {
 
     case "postback":
       return handlePostbackEvent(event);
-
+    case "follow":
+      return getReplayTextMessages(event, ["友達追加ありがとうございます！"]);
+    case "unfollow":
+      deleteUser(event.source.userId);
+      break;
     default:
       return getReplayTextMessages(event, ["...?"]);
   }

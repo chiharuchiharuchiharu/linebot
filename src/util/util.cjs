@@ -52,6 +52,14 @@ exports.addUser = async function (userId) {
   return res;
 };
 
+//ユーザーを削除する
+exports.deleteUser = async function (userId) {
+  await global.pool
+    .query(`delete from users where user_id='${userId}'`)
+    .then((result) => result)
+    .catch((err) => err);
+};
+
 // ユーザー情報を取得する
 exports.getUserInfo = async function (userId) {
   const user = await global.pool
