@@ -43,32 +43,15 @@ async function getShiftList(event) {
 exports.getShiftList = getShiftList;
 
 // シフトを削除する
-async function deleteShifts(event) {
+async function deleteShifts(event, data) {
+  const shiftId = deta.split(" ")[1];
   const userId = event.source.userId;
   const shifts = await getShiftList(event);
-
-  // status を none に変更
-  await global.pool
-    .query(`update users set status='none' where user_id='${userId}'`)
-    .catch((err) => {
-      console.log(err);
-    });
-
-  const shift_ids = event.message.text.split(",").map((index) => {
-    return shifts[parseInt(index) - 1].shift_id;
-  });
-
-  if (shift_ids.length === 0) {
-    return getReplayTextMessages(event, ["削除するシフトがありませんでした"]);
-  }
 
   // 削除
   await global.pool
     .query(
-      `delete from shifts where user_id='${userId}' and shift_id in (${shift_ids.join(
-        ","
-      )})`
-    )
+      `delete from shifts where user_id='${userId}' and shift_id = ${shiftId}`)
     .catch((err) => {
       console.log(err);
     });

@@ -79,11 +79,11 @@ app.get("/api/shift/get", (req, res) => {
     .query(`select * from shifts where date in ('${days.join("','")}')`)
     .then((result) => {
       const datum = {};
-      days.map((date) =>{
+      days.map((date) => {
         datum[date] = {
           data: [],
         };
-      })
+      });
       result.rows.map((item) => {
         const date = item.date;
         const start = item.start_time.toString();
@@ -132,9 +132,7 @@ async function handleMessageEvent(event) {
   // nickname と status を取得
   const { nickname, status } = await getUserInfo(userId);
 
-  if (status === "del-shifts") {
-    return await deleteShifts(event);
-  } else if (status === "rg-nick") {
+  if (status === "rg-nick") {
     return await registerNickname(event);
   } else if (!nickname) {
     return await askNickname(event);
@@ -174,6 +172,8 @@ async function handlePostbackEvent(event) {
         return getRegisterBubbleMessage(event);
       case "5":
         return getConfirmMessage(event);
+        case "9":
+          return deleteShifts(event, deta);
     }
   } else {
     return getReplayTextMessages(event, [

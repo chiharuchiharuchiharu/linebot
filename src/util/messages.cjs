@@ -418,7 +418,7 @@ exports.getShiftsBubbleMessage = function (event, shifts, canDelete) {
         action: {
           type: "postback",
           label: "delete",
-          data: shift.shift_id,
+          data: `#9 ${shift.shift_id}`,
           displayText: text,
         },
         height: "40px",
