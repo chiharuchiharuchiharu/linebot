@@ -397,31 +397,50 @@ exports.getConfirmMessage = async function (event) {
 
 exports.getShiftsBubbleMessage = function (event, shifts, canDelete) {
   const shiftsBubbele = shifts.map((shift) => {
-    const text = `${shift.date.replace('/', '月')}日 ${shift.start_time}時-${shift.end_time}時`
-    return {
-      type: "box",
-      layout: "vertical",
-      contents: [
-        {
-          type: "text",
-          text: text,
-          color: "#ffffff",
+    const text = `${shift.date.replace("/", "月")}日 ${shift.start_time}時-${
+      shift.end_time
+    }時`;
+    if (canDelete) {
+      return {
+        type: "box",
+        layout: "vertical",
+        contents: [
+          {
+            type: "text",
+            text: text,
+            color: "#ffffff",
+          },
+        ],
+        backgroundColor: "#393e46",
+        justifyContent: "center",
+        alignItems: "center",
+        cornerRadius: "xl",
+        action: {
+          type: "postback",
+          label: "delete",
+          data: shift.shift_id,
+          displayText: text,
         },
-      ],
-      backgroundColor: "#393e46",
-      justifyContent: "center",
-      alignItems: "center",
-      cornerRadius: "xl",
-      action: canDelete
-        ? {
-            type: "postback",
-            label: "delete",
-            data: shift.shift_id,
-            displayText: text,
-          }
-        : {},
-      height: "40px",
-    };
+        height: "40px",
+      };
+    } else {
+      return {
+        type: "box",
+        layout: "vertical",
+        contents: [
+          {
+            type: "text",
+            text: text,
+            color: "#ffffff",
+          },
+        ],
+        backgroundColor: "#393e46",
+        justifyContent: "center",
+        alignItems: "center",
+        cornerRadius: "xl",
+        height: "40px",
+      };
+    }
   });
   return global.client.replyMessage(event.replyToken, [
     {
