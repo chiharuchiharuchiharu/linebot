@@ -83,7 +83,7 @@ app.get("/api/shift/get", (req, res) => {
         datum[date] = {
           data: [],
         };
-      }
+      })
       result.rows.map((item) => {
         const date = item.date;
         const start = item.start_time.toString();
