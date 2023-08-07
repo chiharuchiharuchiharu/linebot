@@ -72,25 +72,22 @@ app.get("/shifts", (req, res) => {
     });
 });
 
-app.get("/get", (req, res) => {
+app.get("/api/shift/get", (req, res) => {
   const day = req.query.day;
   const days = getWeekdates(day);
   global.pool
     .query(`select * from shifts where date in ('${days.join("','")}')`)
     .then((result) => {
       const datum = {};
-
+      days.map((date) =>{
+        datum[date] = {
+          data: [],
+        };
+      }
       result.rows.map((item) => {
         const date = item.date;
         const start = item.start_time.toString();
         const end = item.end_time.toString();
-
-        if (!(date in datum)) {
-          datum[date] = {
-            day: 0,
-            data: [],
-          };
-        }
 
         datum[date].data.push({
           name: item.nickname,
