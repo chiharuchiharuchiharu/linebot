@@ -444,24 +444,28 @@ exports.getShiftsBubbleMessage = function (event, shifts, canDelete) {
   });
   return global.client.replyMessage(event.replyToken, [
     {
-      type: "carousel",
-      contents: [
-        {
-          type: "bubble",
-          size: "deca",
-          body: {
-            type: "box",
-            layout: "vertical",
-            contents: shiftsBubbele,
-            spacing: "md",
-          },
-          styles: {
-            footer: {
-              separator: false,
+      type: "flex",
+      altText: "以上の内容で登録しますか?",
+      contents: {
+        type: "carousel",
+        contents: [
+          {
+            type: "bubble",
+            size: "deca",
+            body: {
+              type: "box",
+              layout: "vertical",
+              contents: shiftsBubbele,
+              spacing: "md",
+            },
+            styles: {
+              footer: {
+                separator: false,
+              },
             },
           },
-        },
-      ],
+        ],
+      },
     },
   ]);
 };
