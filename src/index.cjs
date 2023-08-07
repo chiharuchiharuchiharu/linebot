@@ -138,7 +138,7 @@ async function handleMessageEvent(event) {
     return await registerNickname(event);
   } else if (!nickname) {
     return await askNickname(event);
-  } else if (text.match(/ニックネーム/)) {
+  } else if (text.match(/カウンセラーネーム/)) {
     return await askNickname(event, nickname);
   } else if (text.match(/登録/)) {
     return getWeekBubbleMessage(event);

@@ -1,6 +1,6 @@
 const { getReplayTextMessages } = require("./messages.cjs");
 
-// ニックネームを登録する
+// カウンセラーネームを登録する
 exports.registerNickname = async function (event) {
   const text = event.message.text;
 
@@ -11,7 +11,7 @@ exports.registerNickname = async function (event) {
   }
 };
 
-// ニックネーム登録をキャンセルすsる
+// カウンセラーネーム登録をキャンセルすsる
 async function registerNicknameCancel(event) {
   const userId = event.source.userId;
   await global.pool.query(
@@ -20,7 +20,7 @@ async function registerNicknameCancel(event) {
   return getReplayTextMessages(event, ["キャンセルしました"]);
 }
 
-// ニックネーム登録を確定する
+// カウンセラーネーム登録を確定する
 async function registerNicknameConfirm(event, nickname) {
   const userId = event.source.userId;
   // nickname がすでに使用されているかどうかを確認
@@ -32,29 +32,29 @@ async function registerNicknameConfirm(event, nickname) {
 
   if (count > 0) {
     return getReplayTextMessages(event, [
-      "すでに使用されているニックネームです",
+      "すでに使用されているカウンセラーネームです",
     ]);
   } else {
-    // ニックネームを登録
+    // カウンセラーネームを登録
     global.pool
       .query(
         `update users set nickname='${nickname}', status='rged-nick' where user_id='${userId}'`
       )
       .then(() => {
         return getReplayTextMessages(event, [
-          `ニックネームを登録しました\n> ${nickname}`,
+          `カウンセラーネームを登録しました\n> ${nickname}`,
         ]);
       })
       .catch((err) => {
         console.log(err);
         return getReplayTextMessages(event, [
-          `ニックネームの登録に失敗しました\n> ${nickname}`,
+          `カウンセラーネームの登録に失敗しました\n> ${nickname}`,
         ]);
       });
   }
 }
 
-// ニックネームを聞く
+// カウンセラーネームを聞く
 exports.askNickname = async function (event, nickname = "") {
   const userId = event.source.userId;
   if (nickname) {
@@ -62,12 +62,12 @@ exports.askNickname = async function (event, nickname = "") {
       `update users set status='rg-nick' where user_id='${userId}'`
     );
     return getReplayTextMessages(event, [
-      `ニックネームを教えてください\nキャンセルする場合は「キャンセル」と送信してください\n現在のニックネーム「${nickname}」`,
+      `カウンセラーネームを教えてください\nキャンセルする場合は「キャンセル」と送信してください\n現在のカウンセラーネーム「${nickname}」`,
     ]);
   } else {
     await global.pool.query(
       `update users set status='rg-nick' where user_id='${userId}'`
     );
-    return getReplayTextMessages(event, ["ニックネームを教えてください"]);
+    return getReplayTextMessages(event, ["カウンセラーネームを教えてください"]);
   }
 };
