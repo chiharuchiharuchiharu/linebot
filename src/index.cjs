@@ -145,7 +145,7 @@ async function handleMessageEvent(event) {
   } else if (text.match(/一覧/)) {
     return await getShiftListMessage(event);
   } else if (text.match(/削除/)) {
-    return await askDeleteShifts(event);
+    return await getShiftListMessage(event, true);
   } else {
     return getReplayTextMessages(event, [`${text} とは?`]);
   }

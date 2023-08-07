@@ -1,0 +1,43 @@
+{
+    "type": "carousel",
+    "contents": [
+      {
+        "type": "bubble",
+        "size": "deca",
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "8時",
+                  "color": "#ffffff"
+                }
+              ],
+              "backgroundColor": "#393e46",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "cornerRadius": "xl",
+              "action": {
+                "type": "postback",
+                "label": "delete",
+                "data": "delete%%",
+                "displayText": "8時"
+              },
+              "height": "40px"
+            }
+          ],
+          "spacing": "md"
+        },
+        "styles": {
+          "footer": {
+            "separator": false
+          }
+        }
+      }
+    ]
+  }

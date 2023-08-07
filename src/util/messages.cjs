@@ -149,7 +149,7 @@ exports.getTimeBubbleMessage = function (event, state) {
   const times = [];
   let startTime = 8;
   let endTime = 21;
-  const range = [8,20];
+  const range = [8, 20];
 
   if (state == 2) {
     data.date = event.postback.data.split(" ")[1];
@@ -163,46 +163,46 @@ exports.getTimeBubbleMessage = function (event, state) {
   for (let i = startTime; i <= endTime; i++) times.push(i);
 
   const content = times.map((time) => {
-    if(range[0] <= time && time <= range[1])
-    return {
-      type: "box",
-      layout: "vertical",
-      contents: [
-        {
-          type: "text",
-          text: `${time}時`,
-          color: "#ffffff",
+    if (range[0] <= time && time <= range[1])
+      return {
+        type: "box",
+        layout: "vertical",
+        contents: [
+          {
+            type: "text",
+            text: `${time}時`,
+            color: "#ffffff",
+          },
+        ],
+        backgroundColor: "#393e46",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "50px",
+        cornerRadius: "lg",
+        action: {
+          type: "postback",
+          label: "time",
+          data: `#${state + 1} ${time} ${JSON.stringify(data)}`,
+          displayText: `${time}時`,
         },
-      ],
-      backgroundColor: "#393e46",
-      justifyContent: "center",
-      alignItems: "center",
-      height: "50px",
-      cornerRadius: "lg",
-      action: {
-        type: "postback",
-        label: "time",
-        data: `#${state + 1} ${time} ${JSON.stringify(data)}`,
-        displayText: `${time}時`,
-      },
-    };
+      };
     else
-    return {
-      type: "box",
-      layout: "vertical",
-      contents: [
-        {
-          type: "text",
-          text: `${time}時`,
-          color: "#888888",
-        },
-      ],
-      backgroundColor: "#393e46",
-      justifyContent: "center",
-      alignItems: "center",
-      height: "50px",
-      cornerRadius: "lg",
-    };
+      return {
+        type: "box",
+        layout: "vertical",
+        contents: [
+          {
+            type: "text",
+            text: `${time}時`,
+            color: "#888888",
+          },
+        ],
+        backgroundColor: "#393e46",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "50px",
+        cornerRadius: "lg",
+      };
   });
 
   // content を半分に分ける
@@ -393,4 +393,55 @@ exports.getConfirmMessage = async function (event) {
         });
     }
   }
+};
+
+exports.getShiftsBubbleMessage = function (event, shifts, canDelete) {
+  const shiftsBubbele = shifts.map((shift) => {
+    return {
+      type: "box",
+      layout: "vertical",
+      contents: [
+        {
+          type: "text",
+          text: "8時",
+          color: "#ffffff",
+        },
+      ],
+      backgroundColor: "#393e46",
+      justifyContent: "center",
+      alignItems: "center",
+      cornerRadius: "xl",
+      action: canDelete
+        ? {
+            type: "postback",
+            label: "delete",
+            data: "delete%%",
+            displayText: "8時",
+          }
+        : {},
+      height: "40px",
+    };
+  });
+  return global.client.replyMessage(event.replyToken, [
+    {
+      type: "carousel",
+      contents: [
+        {
+          type: "bubble",
+          size: "deca",
+          body: {
+            type: "box",
+            layout: "vertical",
+            contents: shiftsBubbele,
+            spacing: "md",
+          },
+          styles: {
+            footer: {
+              separator: false,
+            },
+          },
+        },
+      ],
+    },
+  ]);
 };

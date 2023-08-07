@@ -1,12 +1,12 @@
-const { getReplayTextMessages } = require("./messages.cjs");
+const { getReplayTextMessages, getShiftsBubbleMessage} = require("./messages.cjs");
 
 // シフト一覧メッセージを取得する
-exports.getShiftListMessage = async function (event) {
-  const text = await getShiftListText(event);
+exports.getShiftListMessage = async function (event, canDelete = false) {
+  const shifts = await getShiftList(event);
 
   if (!text)
     return getReplayTextMessages(event, ["シフトが登録されていません"]);
-  else return getReplayTextMessages(event, [text]);
+  else return getShiftsBubbleMessage(event, shifts, canDelete);
 };
 
 // シフト一覧を取得する
