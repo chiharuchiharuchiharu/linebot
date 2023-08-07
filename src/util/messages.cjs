@@ -397,13 +397,14 @@ exports.getConfirmMessage = async function (event) {
 
 exports.getShiftsBubbleMessage = function (event, shifts, canDelete) {
   const shiftsBubbele = shifts.map((shift) => {
+    const text = `${shift.replace('/', '月')}日 ${shift.start_time}時-${shift.end_time}時`
     return {
       type: "box",
       layout: "vertical",
       contents: [
         {
           type: "text",
-          text: "8時",
+          text: text,
           color: "#ffffff",
         },
       ],
@@ -415,8 +416,8 @@ exports.getShiftsBubbleMessage = function (event, shifts, canDelete) {
         ? {
             type: "postback",
             label: "delete",
-            data: "delete%%",
-            displayText: "8時",
+            data: shift.shift_id,
+            displayText: text,
           }
         : {},
       height: "40px",
