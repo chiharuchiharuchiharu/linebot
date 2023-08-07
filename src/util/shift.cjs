@@ -44,7 +44,7 @@ exports.getShiftList = getShiftList;
 
 // シフトを削除する
 async function deleteShifts(event, data) {
-  const shiftId = deta.split(" ")[1];
+  const shiftId = data.split(" ")[1];
   const userId = event.source.userId;
   const shifts = await getShiftList(event);
 
