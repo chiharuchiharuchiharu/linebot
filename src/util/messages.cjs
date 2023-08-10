@@ -1,3 +1,4 @@
+const { default: e } = require("express");
 const { getWeekdates, getWeekLastDate, getUserInfo } = require("./util.cjs");
 
 // テキストメッセージを送信する
@@ -161,10 +162,9 @@ exports.getDayBubbleMessage = function (event) {
 exports.getTimeBubbleMessage = function (event, state) {
   let data = {};
 
-  const times = [];
   let startTime = 8;
   let endTime = 21;
-  const range = [8, 20];
+  const range = [8, 18];
 
   if (state == 2) {
     data.date = event.postback.data.split(" ")[1];
@@ -172,13 +172,42 @@ exports.getTimeBubbleMessage = function (event, state) {
     data = JSON.parse(event.postback.data.split(" ")[2]);
     data.start = parseInt(event.postback.data.split(" ")[1]);
     range[0] = data.start + 1;
-    range[1] = 21;
+    range[1] = 19;
   }
 
-  for (let i = startTime; i <= endTime; i++) times.push(i);
+  const times = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20];
 
   const content = times.map((time) => {
-    if (range[0] <= time && time <= range[1])
+    let text = `${time}時`;
+
+    if (time == 8) text = "8時半";
+    else if (time == 19) text = "18時半";
+
+if (time == 20){
+data.start = 19;
+      return {
+        type: "box",
+        layout: "vertical",
+        contents: [
+          {
+            type: "text",
+            text: "夜プロ",
+            color: "#ffffff",
+          },
+        ],
+        backgroundColor: "#393e46",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "50px",
+        cornerRadius: "lg",
+        action: {
+          type: "postback",
+          label: "time",
+          data: `#4 21 ${JSON.stringify(data)}`,
+          displayText: "夜プロ",
+        },
+      };
+}else if (range[0] <= time && time <= range[1])
       return {
         type: "box",
         layout: "vertical",

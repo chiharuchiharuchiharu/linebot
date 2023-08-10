@@ -86,8 +86,14 @@ app.get("/api/shift/get", (req, res) => {
       });
       result.rows.map((item) => {
         const date = item.date;
-        const start = item.start_time.toString();
-        const end = item.end_time.toString();
+        let start = item.start_time.toString();
+        let end = item.end_time.toString();
+
+        if (start == "8") start = "8.5";
+        else if (start == "19") start = "18.5";
+
+        if (end == "8") end = "8.5";
+        else if (end == "19") end = "18.5";
 
         datum[date].data.push({
           name: item.nickname,
@@ -172,8 +178,8 @@ async function handlePostbackEvent(event) {
         return getRegisterBubbleMessage(event);
       case "5":
         return getConfirmMessage(event);
-        case "9":
-          return deleteShifts(event, data);
+      case "9":
+        return deleteShifts(event, data);
     }
   } else {
     return getReplayTextMessages(event, [
