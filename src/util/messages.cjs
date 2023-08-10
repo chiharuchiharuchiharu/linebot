@@ -303,10 +303,16 @@ exports.getRegisterBubbleMessage = function (event) {
   const data = JSON.parse(event.postback.data.split(" ")[2]);
   data.end = parseInt(event.postback.data.split(" ")[1]);
 
+  let start = `${data.start}時`;
+  let end = `${data.end}時`;
+
+  if (data.start == 8) start = "8時半";
+  if (data.end == 19) end = "18時半"
+
   return global.client.replyMessage(event.replyToken, [
     {
       type: "text",
-      text: `以下の内容で登録しますか?\n> ${data.date} ${data.start}時 - ${data.end}時`,
+      text: `以下の内容で登録しますか?\n> ${data.date} ${start}時 - ${end}時`,
     },
     {
       type: "flex",
