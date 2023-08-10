@@ -99,7 +99,7 @@ exports.getDayBubbleMessage = function (event) {
     "8/31",
   ];
   const days = dates.map((date) => {
-    const day = new Date(date).getDay();
+    const day = new Date(`2023/${date}`).getDay();
     const dayOfWeek = ["日", "月", "火", "水", "木", "金", "土"];
     return dayOfWeek[day];
   });
