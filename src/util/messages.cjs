@@ -83,10 +83,25 @@ exports.getWeekBubbleMessage = function (event) {
 
 // どの日かを選択するバブルメッセージを送信する
 exports.getDayBubbleMessage = function (event) {
-  const selectedFirstDate = event.postback.data.split(" ")[1];
-  const dates = getWeekdates(selectedFirstDate);
-
-  const days = ["月", "火", "水", "木", "金", "土", "日"];
+  //const selectedFirstDate = event.postback.data.split(" ")[1];
+  //const dates = getWeekdates(selectedFirstDate);
+  const dates = [
+    "8/22",
+    "8/23",
+    "8/24",
+    "8/25",
+    "8/26",
+    "8/27",
+    "8/28",
+    "8/29",
+    "8/30",
+    "8/31",
+  ];
+  const days = dates.map((date) => {
+    const day = new Date(date).getDay();
+    const dayOfWeek = ["日", "月", "火", "水", "木", "金", "土"];
+    return dayOfWeek[day];
+  });
 
   const dayBubbles = dates.map((date, i) => {
     return {
@@ -388,7 +403,7 @@ exports.getShiftsBubbleMessage = function (event, shifts, canDelete) {
         cornerRadius: "xl",
         action: {
           type: "postback",
-          label: "delete",
+          label: "del",
           data: `#9 ${shift.shift_id}`,
           displayText: text,
         },

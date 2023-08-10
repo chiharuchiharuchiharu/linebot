@@ -139,7 +139,7 @@ async function handleMessageEvent(event) {
   } else if (text.match(/カウンセラーネーム/)) {
     return await askNickname(event, nickname);
   } else if (text.match(/登録/)) {
-    return getWeekBubbleMessage(event);
+    return getDayBubbleMessage(event);
   } else if (text.match(/一覧/)) {
     return await getShiftListMessage(event);
   } else if (text.match(/削除/)) {
