@@ -428,7 +428,9 @@ exports.getShiftsBubbleMessage = function (event, shifts, canDelete) {
     let end = `${shift.end_time}時`;
 
     if (shift.start_time == 8) start = "8時半";
-    if (shift.end_time == 19) end = "18時半";
+    else if (shift.start_time == 19) end = "18時半";
+    if (shift.end_time == 8) start = "8時半";
+    else if (shift.end_time == 19) end = "18時半";
 
     const text = `${shift.date.replace("/", "月")}日 ${start}-${end}`;
     if (canDelete) {
