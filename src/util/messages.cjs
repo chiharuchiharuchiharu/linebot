@@ -184,7 +184,7 @@ exports.getTimeBubbleMessage = function (event, state) {
     else if (time == 19) text = "18時半";
 
     if (time == 20) {
-      if(state == 2) data.start = 19;
+      if (state == 2) data.start = 19;
       return {
         type: "box",
         layout: "vertical",
@@ -255,7 +255,9 @@ exports.getTimeBubbleMessage = function (event, state) {
   const rightContent = content.slice(half);
   let message = "";
 
-  if(state == 2) text = "開始時間を選択してください\n夜プロのみの参加の場合は夜プロを選択してください";
+  if (state == 2)
+    text =
+      "開始時間を選択してください\n夜プロのみの参加の場合は夜プロを選択してください";
   else text = "終了時間を選択してください";
 
   return global.client.replyMessage(event.replyToken, [
@@ -307,7 +309,7 @@ exports.getRegisterBubbleMessage = function (event) {
   let end = `${data.end}時`;
 
   if (data.start == 8) start = "8時半";
-  if (data.end == 19) end = "18時半"
+  if (data.end == 19) end = "18時半";
 
   return global.client.replyMessage(event.replyToken, [
     {
@@ -422,9 +424,13 @@ exports.getConfirmMessage = async function (event) {
 
 exports.getShiftsBubbleMessage = function (event, shifts, canDelete) {
   const shiftsBubbele = shifts.map((shift) => {
-    const text = `${shift.date.replace("/", "月")}日 ${shift.start_time}時-${
-      shift.end_time
-    }時`;
+    let start = `${shift.start_time}時`;
+    let end = `${shift.end_time}時`;
+
+    if (shift.start_time == 8) start = "8時半";
+    if (shift.end_time == 19) end = "18時半";
+
+    const text = `${shift.date.replace("/", "月")}日 ${start}-${end}`;
     if (canDelete) {
       return {
         type: "box",
