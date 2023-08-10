@@ -309,6 +309,7 @@ exports.getRegisterBubbleMessage = function (event) {
   let end = `${data.end}時`;
 
   if (data.start == 8) start = "8時半";
+  else if (data.start == 19) start = "18時半";
   if (data.end == 19) end = "18時半";
 
   return global.client.replyMessage(event.replyToken, [
