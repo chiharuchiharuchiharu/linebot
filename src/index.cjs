@@ -76,7 +76,7 @@ app.get("/api/shift/get", (req, res) => {
   const day = req.query.day;
   const days = getWeekdates(day);
   global.pool
-    .query(`select * from shifts where date in ('${days.join("','")}') oder by nickname asc, start_time asc`)
+    .query(`select * from shifts where date in ('${days.join("','")}') order by nickname asc, start_time asc`)
     .then((result) => {
       const datum = {};
       days.map((date) => {
