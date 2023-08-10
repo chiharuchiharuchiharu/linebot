@@ -76,7 +76,7 @@ app.get("/api/shift/get", (req, res) => {
   const day = req.query.day;
   const days = getWeekdates(day);
   global.pool
-    .query(`select * from shifts where date in ('${days.join("','")}')`)
+    .query(`select * from shifts where date in ('${days.join("','")}') oder by nickname asc, start_time asc`)
     .then((result) => {
       const datum = {};
       days.map((date) => {
@@ -118,7 +118,7 @@ async function handleEvent(event) {
     case "postback":
       return handlePostbackEvent(event);
     case "follow":
-      return getReplayTextMessages(event, ["友達追加ありがとうございます！"]);
+      return getReplayTextMessages(event, ["友達追加ありがとうございます！\nみろく会の夏活の参加募集用のLINEです。\nまず初めに、あなたのカウンセラーネームを教えてください。\nキーボードは、画面左下のキーボードマークから表示できます。"]);
     default:
       return getReplayTextMessages(event, ["...?"]);
   }
