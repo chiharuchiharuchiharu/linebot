@@ -119,9 +119,6 @@ async function handleEvent(event) {
       return handlePostbackEvent(event);
     case "follow":
       return getReplayTextMessages(event, ["友達追加ありがとうございます！"]);
-    case "unfollow":
-      deleteUser(event.source.userId);
-      break;
     default:
       return getReplayTextMessages(event, ["...?"]);
   }
