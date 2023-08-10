@@ -312,7 +312,7 @@ exports.getRegisterBubbleMessage = function (event) {
   return global.client.replyMessage(event.replyToken, [
     {
       type: "text",
-      text: `以下の内容で登録しますか?\n> ${data.date} ${start}時 - ${end}時`,
+      text: `以下の内容で登録しますか?\n> ${data.date} ${start} - ${end}`,
     },
     {
       type: "flex",
