@@ -340,37 +340,9 @@ exports.getConfirmMessage = async function (event) {
     // nickname  を取得
     const { nickname } = await getUserInfo(userId);
 
-    // 同じ日に同じユーザーが登録しているか
-    const { count } = await global.pool
+    global.pool
       .query(
-        `select count(*) from shifts where user_id='${userId}' and date='${data.date}'`
-      )
-      .then((result) => {
-        return result.rows[0];
-      });
-
-    if (count > 0) {
-      // 上書きする
-      global.pool
-        .query(
-          `update shifts set 
-            start_time=${data.start},
-            end_time=${data.end}
-          where
-            user_id='${userId}'
-            and date='${data.date}'`
-        )
-        .then(() => {
-          return getReplayTextMessages(event, ["上書きしました"]);
-        })
-        .catch((err) => {
-          console.log("err", err);
-          return getReplayTextMessages(event, ["登録に失敗しました"]);
-        });
-    } else {
-      global.pool
-        .query(
-          `insert into shifts (
+        `insert into shifts (
             user_id,
             nickname,
             date,
@@ -383,15 +355,14 @@ exports.getConfirmMessage = async function (event) {
             ${data.start},
             ${data.end}
           )`
-        )
-        .then(() => {
-          return getReplayTextMessages(event, ["登録が完了しました"]);
-        })
-        .catch((err) => {
-          console.log("err", err);
-          return getReplayTextMessages(event, ["登録に失敗しました"]);
-        });
-    }
+      )
+      .then(() => {
+        return getReplayTextMessages(event, ["登録が完了しました"]);
+      })
+      .catch((err) => {
+        console.log("err", err);
+        return getReplayTextMessages(event, ["登録に失敗しました"]);
+      });
   }
 };
 
