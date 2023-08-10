@@ -183,8 +183,8 @@ exports.getTimeBubbleMessage = function (event, state) {
     if (time == 8) text = "8時半";
     else if (time == 19) text = "18時半";
 
-if (time == 20){
-data.start = 19;
+    if (time == 20) {
+      if(state == 2) data.start = 19;
       return {
         type: "box",
         layout: "vertical",
@@ -207,14 +207,14 @@ data.start = 19;
           displayText: "夜プロ",
         },
       };
-}else if (range[0] <= time && time <= range[1])
+    } else if (range[0] <= time && time <= range[1])
       return {
         type: "box",
         layout: "vertical",
         contents: [
           {
             type: "text",
-            text: `${time}時`,
+            text: text,
             color: "#ffffff",
           },
         ],
@@ -227,7 +227,7 @@ data.start = 19;
           type: "postback",
           label: "time",
           data: `#${state + 1} ${time} ${JSON.stringify(data)}`,
-          displayText: `${time}時`,
+          displayText: text,
         },
       };
     else
@@ -237,7 +237,7 @@ data.start = 19;
         contents: [
           {
             type: "text",
-            text: `${time}時`,
+            text: text,
             color: "#888888",
           },
         ],
@@ -253,11 +253,15 @@ data.start = 19;
   const half = Math.ceil(content.length / 2);
   const leftContent = content.slice(0, half);
   const rightContent = content.slice(half);
+  let message = "";
+
+  if(state == 2) text = "開始時間を選択してください\n夜プロのみの参加の場合は夜プロを選択してください";
+  else text = "終了時間を選択してください";
 
   return global.client.replyMessage(event.replyToken, [
     {
       type: "text",
-      text: `${state == 2 ? "開始" : "終了"}時間を選択してください`,
+      text: text,
     },
     {
       type: "flex",
