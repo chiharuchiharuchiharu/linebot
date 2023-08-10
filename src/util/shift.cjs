@@ -31,7 +31,16 @@ async function getShiftList(event) {
       `select * from shifts where user_id='${userId}' order by date asc, start_time asc`
     )
     .then((result) => {
-      return result.rows;
+      const datum = result.rows.map((item) => {
+        if (item.start_time == 8) item.start_time = "8.5";
+        else if (item.start_time == 19) item.start_time = "18.5";
+
+        if (item.end_time == 8) item.end_time = "8.5";
+        else if (item.end_time == 19) item.end_time = "18.5";
+
+        return item;
+      });
+      return datum;
     })
     .catch((err) => {
       console.log("getShiftList", err);
