@@ -476,30 +476,63 @@ exports.getShiftsBubbleMessage = function (event, shifts, canDelete) {
       };
     }
   });
-  return global.client.replyMessage(event.replyToken, [
-    {
-      type: "flex",
-      altText: "以上の内容で登録しますか?",
-      contents: {
-        type: "carousel",
-        contents: [
-          {
-            type: "bubble",
-            size: "deca",
-            body: {
-              type: "box",
-              layout: "vertical",
-              contents: shiftsBubbele,
-              spacing: "md",
-            },
-            styles: {
-              footer: {
-                separator: false,
+  if (canDelete) {
+    return global.client.replyMessage(event.replyToken, [
+      {
+        type: "text",
+        text: "削除するシフトを選択してください",
+      },
+      {
+        type: "flex",
+        altText: "シフトリスト",
+        contents: {
+          type: "carousel",
+          contents: [
+            {
+              type: "bubble",
+              size: "deca",
+              body: {
+                type: "box",
+                layout: "vertical",
+                contents: shiftsBubbele,
+                spacing: "md",
+              },
+              styles: {
+                footer: {
+                  separator: false,
+                },
               },
             },
-          },
-        ],
+          ],
+        },
       },
-    },
-  ]);
+    ]);
+  } else {
+    return global.client.replyMessage(event.replyToken, [
+      {
+        type: "flex",
+        altText: "シフトリスト",
+        contents: {
+          type: "carousel",
+          contents: [
+            {
+              type: "bubble",
+              size: "deca",
+              body: {
+                type: "box",
+                layout: "vertical",
+                contents: shiftsBubbele,
+                spacing: "md",
+              },
+              styles: {
+                footer: {
+                  separator: false,
+                },
+              },
+            },
+          ],
+        },
+      },
+    ]);
+  }
 };
